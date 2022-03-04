@@ -355,10 +355,7 @@
         "prefix": [
           "LFPG"
         ],
-        "name": "Charles de Gaulle Approach",
-        "suffix": null,
-        "label_lat": null,
-        "label_lon": null
+        "name": "Charles de Gaulle Approach"
       },
       "geometry": {
         "type": "MultiPolygon",
