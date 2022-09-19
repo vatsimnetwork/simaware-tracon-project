@@ -1,0 +1,7 @@
+on: [push, pull_request]
+
+jobs:
+  json-validator:
+    runs-on: ubuntu-latest
+    - name: Run JSON Lint
+      run: bash <(echo "Hello world")
