@@ -54725,7 +54725,7 @@
       }
     },
     {
-      "type": "MultiPolygon",
+      "type": "Feature",
       "properties": {
         "id": "SBXP",
         "name": "São Paulo Approach",
