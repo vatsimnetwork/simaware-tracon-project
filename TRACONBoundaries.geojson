@@ -54728,13 +54728,13 @@
       "type": "Feature",
       "properties": {
         "id": "SBXP",
-        "name": "São Paulo Approach",
         "prefix": [
           "SBXP"
-        ]
+        ],
+        "name": "São Paulo Approach"
       },
       "geometry": {
-        "type":"MultiPolygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
