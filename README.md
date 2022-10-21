@@ -1,8 +1,15 @@
 # SimAware TRACON Project
 Tired of TRACON circles? SimAware TRACON Project is a community-driven initiative to draw accurate TRACON (and other APP/DEP) facilities on SimAware and other VATSIM mapping tools.
 
-## Contributing
-SimAware TRACON Project is open to anyone willing to contribute.
+
+## How Do I Submit Updates?
+
+We have chosen GitHub to be the core of this project so far, as it allows for collaboration on the project and near real-time updates to VAT-Spy data once a pull request has been pushed to the live data. Updates to data should be made directly by submitting a PR to the corresponding AIRAC branch through GitHub. Updates on GitHub that will be merged will be those that either come from verified GitHub accounts belonging to Regions, Divisions, or FIRs/ARTCCs or that have been explicitly authorized by a staff account. 
+
+## How Do I Verify My Account To Submit Updates?
+
+While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to k.moberg@vatsim.net (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
+
 
 ## Feature Properties
 A typical feature property is shown:
