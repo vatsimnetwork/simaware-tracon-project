@@ -8,7 +8,7 @@ We have chosen GitHub to be the core of this project so far, as it allows for co
 
 ## How Do I Verify My Account To Submit Updates?
 
-While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to karl (at) nyartcc.org (e-mail subject to change in the future). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
+While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to k.moberg@vatsim.net (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
 
 
 ## Feature Properties
