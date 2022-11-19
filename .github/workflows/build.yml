@@ -1,0 +1,32 @@
+name: Compile TRACON Boundaries
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Compile boundary files
+        run: node compiler.js
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: TRACONBoundaries
+          path: TRACONBoundaries.geojson
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: TRACON Boundaries
+          files: TRACONBoundaries.geojson
