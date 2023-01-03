@@ -6,7 +6,7 @@ Tired of TRACON circles? SimAware TRACON Project is a community-driven initiativ
 
 We have chosen GitHub to be the core of this project so far, as it allows for collaboration on the project and near real-time updates to VAT-Spy data once a pull request has been pushed to the live data. Updates to data should be made directly by submitting a PR to the corresponding AIRAC branch through GitHub. Updates on GitHub that will be merged will be those that either come from verified GitHub accounts belonging to Regions, Divisions, or FIRs/ARTCCs or that have been explicitly authorized by a staff account.
 
-If you are submitting a new boundary, create a new folder in the `Boundaries` folder with the name of the folder matching the `id` of the feature property (see **Feature Properties** below). In the folder, create one `<yoursector>.json` file for the airport, or use one JSON file per sector if you have multiple sectors that can be online (example: [Boundaries/N90](https://github.com/vatsimnetwork/simaware-tracon-project/tree/main/Boundaries/N90).
+If you are submitting a new boundary, create a new folder in the `Boundaries` folder with the name of the folder matching the `id` of the feature property (see **Feature Properties** below). In the folder, create one `<yoursector>.json` file for the airport, or use one JSON file per sector if you have multiple sectors that can be online (example: [Boundaries/N90](https://github.com/vatsimnetwork/simaware-tracon-project/tree/main/Boundaries/N90)).
 
 ## How Do I Verify My Account To Submit Updates?
 
