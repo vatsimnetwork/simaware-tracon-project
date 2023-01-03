@@ -10,16 +10,22 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Configure Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Compile boundary files
         run: node compiler.js
+        
+      - name: Tag
+        run: echo ${{ github.sha }} > Release.txt
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
           name: TRACONBoundaries
           path: TRACONBoundaries.geojson
@@ -28,5 +34,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: TRACON Boundaries
           files: TRACONBoundaries.geojson
