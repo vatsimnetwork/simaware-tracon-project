@@ -1,0 +1,39 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "UHMM",
+    "prefix": [
+      "UHMM"
+    ],
+    "name": "Magadan Approach"
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            150.15333,
+            60.57167
+          ],
+          [
+            149.145,
+            59.67667
+          ],
+          [
+            151.53833,
+            59.315
+          ],
+          [
+            152.27167,
+            60.04333
+          ],
+          [
+            151.46667,
+            60.43667
+          ]
+        ]
+      ]
+    ]
+  }
+}

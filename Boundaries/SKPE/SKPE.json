@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "SKPE",
+    "prefix": [
+      "SKPE"
+    ],
+    "name": "Pereira Approach"
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -76.22528,
+            5.141111
+          ],
+          [
+            -75.49667,
+            5.141111
+          ],
+          [
+            -75.49667,
+            4.265833
+          ],
+          [
+            -76.22528,
+            4.265833
+          ]
+        ]
+      ]
+    ]
+  }
+}

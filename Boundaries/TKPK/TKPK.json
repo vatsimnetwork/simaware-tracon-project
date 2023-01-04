@@ -1,0 +1,39 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "TKPK",
+    "prefix": [
+      "TKPK"
+    ],
+    "name": "Bradshaw Approach"
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -62.738333,
+            17.52333
+          ],
+          [
+            -62.5,
+            17.283333
+          ],
+          [
+            -62.5,
+            16.933333
+          ],
+          [
+            -63.0,
+            17.183333
+          ],
+          [
+            -63.0,
+            17.364722
+          ]
+        ]
+      ]
+    ]
+  }
+}
