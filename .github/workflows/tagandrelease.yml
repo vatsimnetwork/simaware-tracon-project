@@ -1,0 +1,42 @@
+name: Tag and Release
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  tag_and_release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check if merged to master
+      if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'master'
+      run: |
+        echo "This pull request was merged to master, proceeding with tag and release creation."
+
+    - name: Get latest tag
+      id: latest_tag
+      run: |
+        latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+        echo "::set-output name=latest_tag::$latest_tag"
+
+    - name: Increment minor version number
+      run: |
+        latest_tag=$(echo ${{ steps.latest_tag.outputs.latest_tag }} | cut -d "." -f 1,2)
+        new_minor_version=$(echo ${{ steps.latest_tag.outputs.latest_tag }} | cut -d "." -f 2)
+        new_minor_version=$((new_minor_version+1))
+        new_tag="${latest_tag}.${new_minor_version}"
+        echo "Tagging new minor version: $new_tag"
+
+    - name: Create tag
+      run: |
+        git tag $new_tag
+        git push origin $new_tag
+
+    - name: Create release
+      uses: actions/create-release@v1
+      with:
+        tag_name: $new_tag
+        release_name: "Release $new_tag"
+        draft: false
+        prerelease: false
