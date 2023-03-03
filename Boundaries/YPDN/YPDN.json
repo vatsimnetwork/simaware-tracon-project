@@ -2,12 +2,11 @@
   "type": "Feature",
   "properties": {
     "id": "YPDN",
+    "name": "Darwin Approach (East)",
     "prefix": [
-      "DN"
-    ],
-    "name": "Darwin Approach",
-    "label_lat": -12.414722,
-    "label_lon": 130.87666
+      "DN",
+      "DN-W"
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

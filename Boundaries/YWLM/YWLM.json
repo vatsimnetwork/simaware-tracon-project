@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YWLM",
+    "name": "Williamtown Approach",
     "prefix": [
       "WLM"
-    ],
-    "name": "Williamtown Approach",
-    "label_lat": -32.795,
-    "label_lon": 151.83444
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YBCS",
+    "name": "Cairns Approach",
     "prefix": [
       "CS"
-    ],
-    "name": "Cairns Approach 1",
-    "label_lat": -16.885834,
-    "label_lon": 145.75528
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

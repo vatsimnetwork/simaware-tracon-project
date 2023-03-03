@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YBOK",
+    "name": "Oakey Approach",
     "prefix": [
       "OK"
-    ],
-    "name": "Oakey Approach",
-    "label_lat": -27.411388,
-    "label_lon": 151.73528
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

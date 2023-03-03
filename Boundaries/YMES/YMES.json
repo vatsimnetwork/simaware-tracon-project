@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YMES",
+    "name": "East Sale Approach",
     "prefix": [
       "ES"
-    ],
-    "name": "East Sale Approach",
-    "label_lat": -38.09889,
-    "label_lon": 147.14944
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "AYNZ",
+    "name": "Nadzab Approach",
     "prefix": [
       "AYNZ"
-    ],
-    "name": "Nadzab Approach",
-    "label_lat": -6.569222,
-    "label_lon": 146.72806
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

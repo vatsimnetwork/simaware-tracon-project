@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YSNW",
+    "name": "Nowra Approach",
     "prefix": [
       "NW"
-    ],
-    "name": "Nowra Approach",
-    "label_lat": -34.94889,
-    "label_lon": 150.53694
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

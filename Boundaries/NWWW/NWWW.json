@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "NWWW",
+    "name": "Tontouta Approach",
     "prefix": [
       "NWWW"
-    ],
-    "name": "Tontouta Approach",
-    "label_lat": -22.045834,
-    "label_lon": 166.15416
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YBTL",
+    "name": "Townsville Approach",
     "prefix": [
       "TL"
-    ],
-    "name": "Townsville Approach",
-    "label_lat": -19.2525,
-    "label_lon": 146.76527
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

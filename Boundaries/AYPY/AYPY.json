@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "AYPY",
+    "name": "Jacksons Radar",
     "prefix": [
       "AYPY"
-    ],
-    "name": "Jacksons Radar",
-    "label_lat": -9.440278,
-    "label_lon": 147.21861
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

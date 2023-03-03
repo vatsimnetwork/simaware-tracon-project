@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YPPH",
+    "name": "Perth Approach",
     "prefix": [
       "PH"
-    ],
-    "name": "Perth Approach",
-    "label_lat": -31.940277,
-    "label_lon": 115.96694
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

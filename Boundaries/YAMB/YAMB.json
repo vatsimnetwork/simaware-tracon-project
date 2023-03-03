@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YAMB",
+    "name": "Amberley Approach",
     "prefix": [
       "AM"
-    ],
-    "name": "Amberley Approach",
-    "label_lat": -27.640556,
-    "label_lon": 152.71194
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",
@@ -84,7 +82,7 @@
           ],
           [
             152.684167,
-            -27.223611
+            -27.223610999999998
           ],
           [
             152.216389,

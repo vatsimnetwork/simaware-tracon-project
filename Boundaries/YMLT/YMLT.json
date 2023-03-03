@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YMLT",
+    "name": "Launceston Approach",
     "prefix": [
       "LT"
-    ],
-    "name": "Launceston Approach",
-    "label_lat": -41.545277,
-    "label_lon": 147.21417
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

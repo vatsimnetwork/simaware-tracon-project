@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "PKWA",
+    "name": "Kwaj Approach",
     "prefix": [
       "PKWA"
-    ],
-    "name": "Kwaj Approach",
-    "label_lat": 8.720122,
-    "label_lon": 167.73166
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",
