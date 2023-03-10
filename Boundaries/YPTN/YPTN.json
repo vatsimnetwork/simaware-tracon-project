@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YPTN",
+    "name": "Tindal Approach",
     "prefix": [
       "TN"
-    ],
-    "name": "Tindal Approach",
-    "label_lat": -14.521111,
-    "label_lon": 132.37778
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",
@@ -139,7 +137,7 @@
             -14.27069
           ],
           [
-            132.772869,
+            132.77286899999999,
             -14.199389
           ],
           [

@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YBMK",
+    "name": "Coral Approach (Mackay)",
     "prefix": [
       "MK"
-    ],
-    "name": "Mackay Approach",
-    "label_lat": -21.171389,
-    "label_lon": 149.17972
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

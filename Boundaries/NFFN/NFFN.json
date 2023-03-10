@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "NFFN",
+    "name": "Nadi Approach",
     "prefix": [
       "NFFN"
-    ],
-    "name": "Nadi Approach",
-    "label_lat": -17.903027,
-    "label_lon": 177.98474
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

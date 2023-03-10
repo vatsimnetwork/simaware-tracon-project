@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "NFNA",
+    "name": "Nausori Approach",
     "prefix": [
       "NFNA"
-    ],
-    "name": "Nausori Approach",
-    "label_lat": -18.044722,
-    "label_lon": 178.55945
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

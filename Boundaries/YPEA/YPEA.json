@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YPEA",
+    "name": "Pearce Approach",
     "prefix": [
       "PE"
-    ],
-    "name": "Pearce Approach",
-    "label_lat": -31.940277,
-    "label_lon": 115.96694
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",

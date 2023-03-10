@@ -2,12 +2,10 @@
   "type": "Feature",
   "properties": {
     "id": "YBRK",
+    "name": "Coral Approach (Rocky)",
     "prefix": [
       "RK"
-    ],
-    "name": "Rockhampton Approach",
-    "label_lat": -23.381945,
-    "label_lon": 150.47528
+    ]
   },
   "geometry": {
     "type": "MultiPolygon",
