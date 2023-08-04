@@ -8,6 +8,11 @@ We have chosen GitHub to be the core of this project so far, as it allows for co
 
 If you are submitting a new boundary, create a new folder in the `Boundaries` folder with the name of the folder matching the `id` of the feature property (see **Feature Properties** below). In the folder, create one `<yoursector>.json` file for the airport, or use one JSON file per sector if you have multiple sectors that can be online (example: [Boundaries/N90](https://github.com/vatsimnetwork/simaware-tracon-project/tree/main/Boundaries/N90)).
 
+## Submitting a Pull Request
+When submitting a Pull Request in GitHub, please make sure to use the template provided by GitHub, and fill out the information asked. This way, we can more easily identify what the change is, and how to test that it is working.
+
+You should include one or more screenshots of the change in the PR using a GIS viewer, demonstrating what the sector is supposed to look like. If this is a new change, you should also ensure that there is documentation backing up the change as necessary, for example images from an AIP that shows the sector. You can use [this example]([url](https://github.com/vatsimnetwork/simaware-tracon-project/pull/294)) to see what a PR should look like.
+
 ## How Do I Verify My Account To Submit Updates?
 
 While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to k.moberg@vatsim.net (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
