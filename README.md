@@ -11,7 +11,7 @@ If you are submitting a new boundary, create a new folder in the `Boundaries` fo
 ## Submitting a Pull Request
 When submitting a Pull Request in GitHub, please make sure to use the template provided by GitHub, and fill out the information asked. This way, we can more easily identify what the change is, and how to test that it is working.
 
-You should include one or more screenshots of the change in the PR using a GIS viewer, demonstrating what the sector is supposed to look like. If this is a new change, you should also ensure that there is documentation backing up the change as necessary, for example images from an AIP that shows the sector. You can use [this example]([url](https://github.com/vatsimnetwork/simaware-tracon-project/pull/294)) to see what a PR should look like.
+You should include one or more screenshots of the change in the PR using a GIS viewer, demonstrating what the sector is supposed to look like. If this is a new change, you should also ensure that there is documentation backing up the change as necessary, for example images from an AIP that shows the sector. You can use [this example](https://github.com/vatsimnetwork/simaware-tracon-project/pull/294) to see what a PR should look like.
 
 ## How Do I Verify My Account To Submit Updates?
 
