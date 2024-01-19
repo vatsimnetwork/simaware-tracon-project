@@ -12,7 +12,7 @@
 <!--- You should include one or more screenshot(s) of your change that show the changes you are implementing -->
 <!--- If you are implementing changes for multiple TMAs, each TMA should have a screenshot. -->
 <!--- Additionally for multiple TMAs there should be an overview screenshots that include all changes -->
-<!--- In the event of a pure code refactoring, just ignore this section -->
+<!--- You should also ensure to include a screenshot of what the changes should look like, for example from an AIP or SOP -->
 
 ## Additional info
 <!--- Ignore if not relevant -->
