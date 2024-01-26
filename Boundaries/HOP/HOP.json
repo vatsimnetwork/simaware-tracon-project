@@ -6,7 +6,7 @@
       "properties": {
         "id": "HOP",
         "prefix": "HOP",
-        "name": "Fort Campbell Approach"
+        "name": "Campbell Approach"
       },
       "geometry": {
         "type": "Polygon",
