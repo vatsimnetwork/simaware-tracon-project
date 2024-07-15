@@ -5,7 +5,7 @@
     "prefix": [
       "UHPP"
     ],
-    "name": "Petropavlovsk Krug"
+    "name": "Petropavlovsk Radar"
   },
   "geometry": {
     "type": "MultiPolygon",

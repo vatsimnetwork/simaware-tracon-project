@@ -15,7 +15,7 @@ You should include one or more screenshots of the change in the PR using a GIS v
 
 ## How Do I Verify My Account To Submit Updates?
 
-While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to k.moberg@vatsim.net (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
+While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to CURRENTLY NOT DECIDED (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
 
 
 ## Feature Properties
