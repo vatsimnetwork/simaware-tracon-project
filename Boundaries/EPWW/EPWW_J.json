@@ -2,10 +2,8 @@
   "type": "Feature", 
   "properties": { 
     "id": "EPWW",
-    "prefix": [
-      "EPWW_J"
-      ],
-      "name": "Warszawa Radar"
+    "prefix": ["EPWW_J"],
+    "name": "Warszawa Radar"
   },
   "geometry": { 
     "type": "MultiPolygon",
