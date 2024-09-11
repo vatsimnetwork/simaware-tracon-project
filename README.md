@@ -42,3 +42,9 @@ A typical feature property is shown:
 
 Note 1: If a double prefix callsign connects, e.g. LAX_U_APP, SimAware will check for matches on *both* "LAX_U" and "LAX" before reverting to a TRACON circle.  This can be useful if further sectorization is desired, e.g. SCT Downey/Zuma sectors.  
 Note 2: If the same prefix/suffix pair is specified in the GeoJSON file, SimAware *will not* know which one to choose.  Each prefix/suffix pair *must* be unique.
+
+## Project Administration
+
+Project is maintained by Tom Kilpatrick, VATNZ. 
+
+We wish to thank previous contributors to this project, notably Karl Mathias Moberg and Maius Wong.
