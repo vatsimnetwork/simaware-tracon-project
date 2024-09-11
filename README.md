@@ -1,10 +1,8 @@
 # SimAware TRACON Project
-Tired of TRACON circles? SimAware TRACON Project is a community-driven initiative to draw accurate TRACON (and other APP/DEP) facilities on SimAware and other VATSIM mapping tools.
-
+The SimAware TRACON Project is a community-driven initiative to have accurate TRACON (and other APP/DEP) facilities depicted on various VATSIM mapping tools. This project was originally developed exclusively for SimAware, although is open for community use.
 
 ## How Do I Submit Updates?
-
-We have chosen GitHub to be the core of this project so far, as it allows for collaboration on the project and near real-time updates to VAT-Spy data once a pull request has been pushed to the live data. Updates to data should be made directly by submitting a PR to the corresponding AIRAC branch through GitHub. Updates on GitHub that will be merged will be those that either come from verified GitHub accounts belonging to Regions, Divisions, or FIRs/ARTCCs or that have been explicitly authorized by a staff account.
+Updates to data should be made directly by submitting a PR. Updates on GitHub that will be merged will be those that either come from verified GitHub accounts belonging to Regions, Divisions, or FIRs/ARTCCs or that have been explicitly authorized by a staff account.
 
 If you are submitting a new boundary, create a new folder in the `Boundaries` folder with the name of the folder matching the `id` of the feature property (see **Feature Properties** below). In the folder, create one `<yoursector>.json` file for the airport, or use one JSON file per sector if you have multiple sectors that can be online (example: [Boundaries/N90](https://github.com/vatsimnetwork/simaware-tracon-project/tree/main/Boundaries/N90)).
 
@@ -15,7 +13,11 @@ You should include one or more screenshots of the change in the PR using a GIS v
 
 ## How Do I Verify My Account To Submit Updates?
 
-While we work on a contribution policy, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to CURRENTLY NOT DECIDED (address subject to change). Only authorized users from each Region, Division, or FIR/ARTCC will be permitted to submit updates. **PRs from non-verified accounts will NOT be merged.**
+Data contributions to the project need to originate from a member of the Regional, Divisional or Sub-Division/ARTCC staff, or any other delegated persons.  
+
+To be added to the contribution list, please send an email to, or have your Region, Division, or FIR/ARTCC Leadership send an email from your/their staff Region, Division, or FIR/ARTCC linked e-mail account with your GitHub username to tom.kilpatrick (at) vatnz.net. 
+
+**PRs from non-verified accounts will NOT be merged.**
 
 
 ## Feature Properties
@@ -33,6 +35,7 @@ A typical feature property is shown:
 * `label_lon` - Optional number. Longitude of desired label location. If not set, SimAware will choose the location automatically.
 
 ## How SimAware Determines TRACON Boundaries
+
 1. SimAware reads this GeoJSON file and records the prefix(es) and suffix of each boundary.
 2. When a callsign with a matching prefix/suffix pair is found, SimAware chooses the correct TRACON boundary to draw.
 3. If no matching prefix/suffix pair is found, SimAware will revert back to a TRACON circle.  Note that SimAware will assume `"suffix"="APP"` if none is specified.
