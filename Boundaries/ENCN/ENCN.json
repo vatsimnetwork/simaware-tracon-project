@@ -3,8 +3,7 @@
   "properties": {
     "id": "ENCN",
     "prefix": [
-      "ENCN",
-      "ENRC"
+      "ENCN"
     ],
     "name": "Kjevik Approach"
   },
