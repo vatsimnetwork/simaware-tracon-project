@@ -10,8 +10,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
       - name: Compile Master Boundary File
         run: node compiler.js
+
       - name: Upload Master Boundary File
         uses: actions/upload-artifact@v3
         with:
