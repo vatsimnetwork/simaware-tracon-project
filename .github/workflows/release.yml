@@ -15,7 +15,7 @@ jobs:
         run: node compiler.js
 
       - name: Upload Master Boundary File
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TRACONBoundaries
           path: TRACONBoundaries.geojson
