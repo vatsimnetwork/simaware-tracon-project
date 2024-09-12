@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Download Master Boundary File
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: TRACONBoundaries
           path: .
