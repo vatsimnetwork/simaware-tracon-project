@@ -1,0 +1,84 @@
+name: Version bump, build and release
+on:
+  workflow_dispatch:
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Compile Master Boundary File
+        run: node compiler.js
+
+      - name: Upload Master Boundary File
+        uses: actions/upload-artifact@v4
+        with:
+          name: TRACONBoundaries
+          path: TRACONBoundaries.geojson
+
+  create_release:
+    needs: compile
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download Master Boundary File
+        uses: actions/download-artifact@v4
+        with:
+          name: TRACONBoundaries
+          path: .
+
+      - name: Tag Version
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          prefix: "v"
+          message: "Tag version to v${steps.tag_version.outputs.new_version}"
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Generate Changelog
+        id: generate_changelog
+        run: |
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          NEW_TAG=${{ steps.tag_version.outputs.new_version }}
+          if [ -z "$PREVIOUS_TAG" ]; then
+            echo "No previous tag found. Generating changelog from the beginning of the repository."
+            CHANGELOG=$(git log --pretty=format:"* %s (%an)")
+          else
+            echo "Previous tag: $PREVIOUS_TAG"
+            echo "New tag: $NEW_TAG"
+            CHANGELOG=$(git log $PREVIOUS_TAG..HEAD --pretty=format:"* %s (%an)")
+          fi
+          echo "$CHANGELOG" > CHANGELOG.md
+        shell: bash
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.tag_version.outputs.new_version }}
+          release_name: Release v${{ steps.tag_version.outputs.new_version }}
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./TRACONBoundaries.geojson
+          asset_name: TRACONBoundaries.geojson
+          asset_content_type: application/octet-stream

@@ -1,10 +1,6 @@
-name: Compile TRACON Boundaries
-
+name: Build Boundaries Only
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
 
 jobs:
   compile:
@@ -20,18 +16,9 @@ jobs:
 
       - name: Compile boundary files
         run: node compiler.js
-        
-      - name: Tag
-        run: echo ${{ github.sha }} > Release.txt
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: TRACONBoundaries
           path: TRACONBoundaries.geojson
-
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: TRACONBoundaries.geojson
