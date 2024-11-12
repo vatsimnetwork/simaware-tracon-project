@@ -6,8 +6,8 @@
       "CB"
     ],
     "name": "Canberra Approach East",
-    "label_lat": -35.306946,
-    "label_lon": 149.195
+    "label_lat": -35.000000,
+    "label_lon": 148.9019456
   },
   "geometry": {
     "type": "MultiPolygon",
