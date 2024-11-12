@@ -6,8 +6,8 @@
       "ML"
     ],
     "name": "Melbourne Approach East",
-    "label_lat": -37.673332,
-    "label_lon": 144.84334
+    "label_lat": -37.509167,
+    "label_lon": 144.559722
   },
   "geometry": {
     "type": "MultiPolygon",
