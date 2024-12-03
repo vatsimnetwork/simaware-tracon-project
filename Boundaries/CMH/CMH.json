@@ -3,7 +3,9 @@
   "properties": {
     "id": "CMH",
     "prefix": [
-      "CMH"
+      "CMH_",
+    "suffic": [
+      "APP"
     ],
     "name": "Columbus Approach"
   },
