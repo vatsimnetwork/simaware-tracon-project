@@ -3,9 +3,9 @@
   "properties": {
     "id": "D10",
     "prefix": [
-      "REG"
+      "D10"
     ],
-    "name": "Regional Approach"
+    "name": "Lone Star Approach"
   },
   "geometry": {
     "type": "MultiPolygon",
