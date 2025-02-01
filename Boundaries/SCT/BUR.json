@@ -5,7 +5,9 @@
     "prefix": [
       "BUR"
     ],
-    "name": "SoCal Approach"
+    "name": "SoCal Approach",
+    "label_lat": 34.5972028,
+    "label_lon": -118.4333361
   },
   "geometry": {
     "type": "MultiPolygon",
