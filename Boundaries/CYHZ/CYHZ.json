@@ -5,7 +5,7 @@
     "prefix": [
       "CYHZ"
     ],
-    "name": "Halifax Arrival/Departure"
+    "name": "Halifax Terminal"
   },
   "geometry": {
     "type": "MultiPolygon",

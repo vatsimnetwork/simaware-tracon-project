@@ -1,0 +1,40 @@
+name: Enforce Directory Structure
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  enforce_dir_structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Directory Structure
+        run: |
+          echo "Validating directory structure..."
+          for dir in Boundaries/*; do
+            if [ -d "$dir" ]; then
+              id=$(basename "$dir")
+              json_files=("$dir"/*.json)
+              if [ ${#json_files[@]} -eq 0 ]; then
+                echo "::error file=$dir::No JSON files found in directory $dir"
+                exit 1
+              fi
+              for json_file in "${json_files[@]}"; do
+                if [[ ! "$json_file" =~ ^$dir/[^/]+\.json$ ]]; then
+                  echo "::error file=$json_file::Invalid JSON file name or location: $json_file"
+                  exit 1
+                fi
+              done
+            else
+              echo "::error file=$dir::Invalid directory: $dir"
+              exit 1
+            fi
+          done
+          echo "Directory structure is valid."

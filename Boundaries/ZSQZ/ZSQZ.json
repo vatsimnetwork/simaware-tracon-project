@@ -5,7 +5,7 @@
     "prefix": [
       "ZSQZ"
     ],
-    "name": "Quanzhou Approach"
+    "name": "Jinjiang Approach"
   },
   "geometry": {
     "type": "MultiPolygon",
@@ -27,6 +27,10 @@
           [
             118.75,
             24.95
+          ],
+          [
+            118.67194444444,
+            24.619444444444
           ]
         ]
       ]
