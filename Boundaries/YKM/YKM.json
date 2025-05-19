@@ -5,7 +5,9 @@
     "prefix": [
       "YKM"
     ],
-    "name": "Spokane Approach"
+    "name": "Spokane Approach",
+    "label_lat": 46.94172,
+    "label_lon": -120.91115
   },
   "geometry": {
     "type": "MultiPolygon",
