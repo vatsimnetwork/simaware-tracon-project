@@ -3,9 +3,9 @@
   "properties": {
     "id": "ULMM",
     "prefix": [
-      "ULMM_R"
+      "ULMM"
     ],
-    "name": "Murmansk Radar"
+    "name": "Murmansk Approach"
   },
   "geometry": {
     "type": "MultiPolygon",
