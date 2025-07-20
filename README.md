@@ -7,7 +7,7 @@ The SimAware TRACON Project is a community-driven initiative to have accurate TR
 To contribute to this dataset, you'll need approval from a local or facility staff member. You can find a list of currently approved contributors [here](https://docs.google.com/spreadsheets/u/4/d/e/2PACX-1vRHzHhKz4icslNkd3I6mF1Mp_6gan4muRcWZb8fCYL8_S0C6GDpG409xQGTmPAXLPupEWWws3euNK7O/pubhtml?gid=0).
 
 > [!Note]
-> A common contributor database is shared between this project and the VAT-Spy Data Project. If you have approval to contribute to one project, you are approved to contribute to either.
+> A common contributor database is shared between this project and the [VAT-Spy Data Project](https://github.com/vatsimnetwork/vatspy-data-project). If you have approval to contribute to one project, you are approved to contribute to either.
 
 ### If you are a staff member
 
@@ -20,7 +20,8 @@ Please include the following information in your email:
 - **VATSIM ID:**
 - **Name:**
 - **Region/FIR:**
-
+- **Staff role**
+ 
 ### If you are not a staff member
 
 Contact the staff in your facility and have them send a request for your account to be approved.
@@ -33,7 +34,7 @@ The email they send should include:
 - **Your Region/FIR:**
 - **VATSIM ID + name of staff member sending the request:**
 
-> [!Note]
+> [!IMPORTANT]
 >
 > - The **Name** you provide will be published on the contributor list.
 > - Approved contributor status lasts **2 years** unless otherwise specified. After this, a new request must be sent.
