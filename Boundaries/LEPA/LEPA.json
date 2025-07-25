@@ -5,7 +5,7 @@
     "prefix": [
       "LEPA"
     ],
-    "name": "Palma Approach"
+    "name": "Palma Control"
   },
   "geometry": {
     "type": "MultiPolygon",
