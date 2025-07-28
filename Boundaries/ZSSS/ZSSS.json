@@ -5,7 +5,9 @@
     "prefix": [
       "ZSSS"
     ],
-    "name": "Shanghai Approach"
+    "name": "Shanghai Approach",
+    "label_lat": 31.222359,
+    "label_lon": 121.517783
   },
   "geometry": {
     "type": "MultiPolygon",
