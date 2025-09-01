@@ -5,10 +5,10 @@
         "prefix": [
             "EDDR"
         ],
-        "name": "Langen Radar"
+        "name": "Langen Radar",
+        "label_lat": 49.935555555556,
+        "label_lon": 6.2011111111111
     },
-    "label_lat": 49.935555555556,
-    "label_lon": 6.2011111111111,
     "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
