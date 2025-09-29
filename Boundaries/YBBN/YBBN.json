@@ -6,7 +6,10 @@
     "prefix": [
       "BN",
       "BN-S"
-    ]
+    ],
+    "name": "Brisbane Approach",
+    "label_lat": -27.64889,
+    "label_lon": 153.03917
   },
   "geometry": {
     "type": "MultiPolygon",
