@@ -8,8 +8,8 @@
       "BN-S"
     ],
     "name": "Brisbane Approach",
-    "label_lat": -27.64889,
-    "label_lon": 153.03917
+    "label_lat": -27.043781,
+    "label_lon": 153.569209
   },
   "geometry": {
     "type": "MultiPolygon",
