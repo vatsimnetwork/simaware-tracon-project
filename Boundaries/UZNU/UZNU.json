@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "UTNU",
+    "id": "UZNU",
     "prefix": [
-      "UTNU"
+      "UZNU"
     ],
     "name": "Urgench Approach"
   },
@@ -11,7 +11,7 @@
     "type": "MultiPolygon",
     "coordinates": [
       [
-        [	
+        [
 			[
 				59.99516666666667,
 				41.99783277777778

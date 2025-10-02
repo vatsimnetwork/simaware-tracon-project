@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "UTFN",
+    "id": "UZFN",
     "prefix": [
-      "UTFN"
+      "UZFN"
     ],
     "name": "Namangan Approach"
   },
@@ -11,7 +11,7 @@
     "type": "MultiPolygon",
     "coordinates": [
       [
-        [	
+        [
 			[
 				70.48333333333333,
 				41.03666666666666
