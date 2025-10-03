@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "UTNN",
+    "id": "UZNN",
     "prefix": [
-      "UTNN"
+      "UZNN"
     ],
     "name": "Nukus Approach"
   },
@@ -11,7 +11,7 @@
     "type": "MultiPolygon",
     "coordinates": [
       [
-        [	
+        [
 			[
 				58.86833277777778,
 				42.63583305555556

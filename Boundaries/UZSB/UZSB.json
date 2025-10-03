@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "UTSB",
+    "id": "UZSB",
     "prefix": [
-      "UTSB"
+      "UZSB"
     ],
     "name": "Bukhara Approach"
   },
@@ -11,7 +11,7 @@
     "type": "MultiPolygon",
     "coordinates": [
       [
-        [	
+        [
 			[
 				62.15983277777778,
 				40.47266666666667
