@@ -5,7 +5,7 @@
     "prefix": [
         "OLBA"
     ],
-    "name": "Beirut Radar"
+    "name": "Beirut Approach"
   },
     "geometry": {
         "type": "MultiPolygon",
