@@ -1,11 +1,11 @@
 {
 	"type": "Feature",
 	"properties": {
-	  "id": "RJFU",
+	  "id": "FUK",
 	  "prefix": [
 		"RJFU"
 	  ],
-	  "name": "Nagasaki Approach"
+	  "name": "Fukuoka Approach"
 	},
 	"geometry": {
 	  "type": "MultiPolygon",
