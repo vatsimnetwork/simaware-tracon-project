@@ -5,7 +5,9 @@
     "prefix": [
       "MOD"
     ],
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": -120.28805600,
+    "label_lon": 36.89388900
   },
   "geometry": {
     "type": "MultiPolygon",

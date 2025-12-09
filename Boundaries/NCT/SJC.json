@@ -6,7 +6,9 @@
       "SJC"
     ],
     "suffix": "APP",
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": -120.81666600,
+    "label_lon": 36.55000000
   },
   "geometry": {
     "type": "MultiPolygon",

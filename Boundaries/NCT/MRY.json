@@ -5,7 +5,9 @@
     "prefix": [
       "MRY"
     ],
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": -122.04583300,
+    "label_lon": 36.11388900
   },
   "geometry": {
     "type": "MultiPolygon",
