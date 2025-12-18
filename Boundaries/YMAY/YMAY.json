@@ -7,8 +7,8 @@
     ],
 	"suffix": "TWR",
     "name": "Albury Tower",
-    "label_lat": -35.739765,
-    "label_lon": 147.037423
+    "label_lat": -35.779205,
+    "label_lon": 147.171548
   },
   "geometry": {
     "type": "Polygon",
