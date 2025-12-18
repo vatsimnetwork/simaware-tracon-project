@@ -7,8 +7,8 @@
     ],
 	"suffix": "TWR",
     "name": "Alice Tower",
-    "label_lat": -23.426111,
-    "label_lon": 133.878056
+    "label_lat": -23.475107,
+    "label_lon": 134.077931
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -6,7 +6,9 @@
     "prefix": [
       "AD",
 	  "AD-W"
-    ]
+    ],
+    "label_lat": -34.336389,
+    "label_lon": 138.375278
   },
   "geometry": {
     "type": "MultiPolygon",
