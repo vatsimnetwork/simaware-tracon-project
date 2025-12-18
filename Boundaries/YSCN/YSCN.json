@@ -7,8 +7,8 @@
     ],
 	"suffix": "TWR",
     "name": "Camden Tower",
-    "label_lat": -33.93114,
-    "label_lon": 150.94682
+    "label_lat": -34.011409,
+    "label_lon": 150.66656
   },
   "geometry": {
     "type": "MultiPolygon",
