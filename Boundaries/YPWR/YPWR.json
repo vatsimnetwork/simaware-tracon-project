@@ -6,7 +6,9 @@
     "prefix": [
       "WR"
     ],
-	"suffix": "TWR"
+	"suffix": "TWR",
+	"label_lat": -30.81588,
+    "label_lon": 136.884342
   },
   "geometry": {
     "type": "MultiPolygon",
