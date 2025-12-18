@@ -5,8 +5,8 @@
     "name": "Woomera Tower",
     "prefix": [
       "WR"
-    ]
-	"suffix": "TWR",
+    ],
+	"suffix": "TWR"
   },
   "geometry": {
     "type": "MultiPolygon",
