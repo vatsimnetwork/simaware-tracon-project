@@ -8,8 +8,7 @@
 	"suffix": "TWR",
     "name": "Townsville Tower",
     "label_lat": -19.373226,
-    "label_lon": 146.743247,
-
+    "label_lon": 146.743247
   },
   "geometry": {
     "type": "MultiPolygon",
