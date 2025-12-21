@@ -5,7 +5,9 @@
     "prefix": [
       "LEBL"
     ],
-    "name": "Barcelona Approach"
+    "name": "Barcelona Approach",
+    "label_lat": 42.477,
+    "label_lon": 3.021
   },
   "geometry": {
     "type": "MultiPolygon",
