@@ -5,7 +5,9 @@
     "prefix": [
       "LEMG"
     ],
-    "name": "Málaga Approach"
+    "name": "Málaga Approach",
+    "label_lat": 37.345, 
+    "label_lon": -4.472
   },
   "geometry": {
     "type": "MultiPolygon",

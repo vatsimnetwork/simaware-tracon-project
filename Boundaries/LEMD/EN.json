@@ -8,7 +8,9 @@
         "prefix": [
           "LEMD"
         ],
-        "name": "Madrid Approach"
+        "name": "Madrid Approach",
+        "label_lat": 41.498,
+        "label_lon": -2.657
       },
       "geometry": {
         "type": "MultiPolygon",
