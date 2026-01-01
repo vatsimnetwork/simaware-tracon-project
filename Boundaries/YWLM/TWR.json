@@ -9,6 +9,7 @@
     "name": "Willy Tower",
     "label_lat": -32.705414,
     "label_lon": 151.64437
+
   },
   "geometry": {
     "type": "MultiPolygon",

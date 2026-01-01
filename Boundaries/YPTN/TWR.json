@@ -9,6 +9,7 @@
     "name": "Tindal Tower",
     "label_lat": -14.393411,
     "label_lon": 132.488381
+
   },
   "geometry": {
     "type": "MultiPolygon",
