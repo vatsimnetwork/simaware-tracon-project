@@ -6,7 +6,9 @@
       "NCT"
     ],
     "suffix": "DEP",
-    "name": "NorCal Departure"
+    "name": "NorCal Departure",
+    "label_lat": -122.13222200,
+    "label_lon": 38.17500000
   },
   "geometry": {
     "type": "MultiPolygon",
