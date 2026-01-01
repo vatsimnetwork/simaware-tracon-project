@@ -6,7 +6,9 @@
       "OAK"
     ],
     "suffix": "APP",
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": -120.60805500,
+    "label_lon": 36.66222200
   },
   "geometry": {
     "type": "MultiPolygon",

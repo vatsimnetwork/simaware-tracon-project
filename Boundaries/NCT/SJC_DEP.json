@@ -6,7 +6,9 @@
       "SJC"
     ],
     "suffix": "DEP",
-    "name": "NorCal Departure"
+    "name": "NorCal Departure",
+    "label_lat": -121.39894000,
+    "label_lon": 37.20543000
   },
   "geometry": {
     "type": "MultiPolygon",
