@@ -7,8 +7,8 @@
     ],
     "suffix": "DEP",
     "name": "NorCal Departure",
-    "label_lat": -122.13222200,
-    "label_lon": 38.17500000
+    "label_lat": 38.17500000,
+    "label_lon": -122.13222200
   },
   "geometry": {
     "type": "MultiPolygon",

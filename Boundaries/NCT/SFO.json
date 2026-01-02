@@ -7,8 +7,8 @@
     ],
     "suffix": "APP",
     "name": "NorCal Approach",
-    "label_lat": -122.11802000,
-    "label_lon": 36.46966000
+    "label_lat": 36.46966000,
+    "label_lon": -122.11802000
   },
   "geometry": {
     "type": "MultiPolygon",
