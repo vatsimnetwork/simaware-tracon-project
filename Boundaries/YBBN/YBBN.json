@@ -5,7 +5,8 @@
     "name": "Brisbane Approach",
     "prefix": [
       "BN",
-      "BN-S"
+      "BN-S",
+	  "BN-R"
     ],
     "name": "Brisbane Approach",
     "label_lat": -27.043781,
