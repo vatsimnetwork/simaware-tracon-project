@@ -5,7 +5,9 @@
     "prefix": [
       "TPA"
     ],
-    "name": "Tampa Approach"
+    "name": "Tampa Approach",
+    "label_lat": 27.84683038,
+    "label_lon": -83.17843146
   },
   "geometry": {
     "type": "MultiPolygon",

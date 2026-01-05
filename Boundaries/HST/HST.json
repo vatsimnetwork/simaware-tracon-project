@@ -5,7 +5,9 @@
     "prefix": [
       "HST"
     ],
-    "name": "Homestead Approach"
+    "name": "Homestead Approach",
+    "label_lat": 25.031111,
+    "label_lon": -80.473333
   },
   "geometry": {
     "type": "MultiPolygon",

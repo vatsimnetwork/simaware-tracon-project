@@ -5,7 +5,9 @@
     "prefix": [
       "RSW"
     ],
-    "name": "Fort Myers Approach"
+    "name": "Fort Myers Approach",
+    "label_lat": 26.5,
+    "label_lon": -82.441111
   },
   "geometry": {
     "type": "MultiPolygon",

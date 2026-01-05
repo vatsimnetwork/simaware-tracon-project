@@ -5,7 +5,9 @@
     "prefix": [
       "MIA"
     ],
-    "name": "Miami Approach"
+    "name": "Miami Approach",
+    "label_lat": 25.9032531,
+    "label_lon": -79.6004999
   },
   "geometry": {
     "type": "MultiPolygon",
