@@ -1,0 +1,45 @@
+name: Data check
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check-geojson:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Check schema
+        shell: sh
+        working-directory: ./scripts
+        run: yarn validate-schema
+  compile-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Compile boundaries
+        shell: sh
+        working-directory: ./scripts
+        run: yarn compile
+      - name: Upload compile artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: TRACONBoundaries.geojson
+          path: |
+            TRACONBoundaries.geojson

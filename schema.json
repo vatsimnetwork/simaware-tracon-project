@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/vatsimnetwork/simaware-tracon-project/refs/heads/main/schema.json",
+  "title": "SimAware TRACON FeatureCollection definition",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "crs": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "name"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "$ref": "./schema-single.json"
+      }
+    }
+  },
+  "required": [
+    "type",
+    "name",
+    "crs",
+    "features"
+  ]
+}

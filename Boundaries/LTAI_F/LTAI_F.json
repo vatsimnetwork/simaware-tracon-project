@@ -2,11 +2,11 @@
   "type": "Feature",
   "properties": {
     "id": "LTAI_F",
-    "prefix": "LTAI_F",
+    "prefix": ["LTAI_F"],
     "suffix": "APP",
     "name": "Antalya Approach",
-    "label_lat": "37.5816",
-    "label_lon": "31.0022"
+    "label_lat": 37.5816,
+    "label_lon": 31.0022
   },
   "geometry": {
     "type": "MultiPolygon",

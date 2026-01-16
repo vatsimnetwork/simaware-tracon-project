@@ -1,0 +1,89 @@
+name: Data check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Check schema
+        shell: sh
+        working-directory: ./scripts
+        run: yarn validate-schema
+  validate-contributor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Check Boundaries.geojson
+        shell: sh
+        working-directory: ./scripts
+        run: yarn check-contributor --login="${{ github.event.pull_request.user.login }}" --failWhenMissing
+  compile-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Compile boundaries
+        shell: sh
+        working-directory: ./scripts
+        run: yarn compile
+      - name: Upload compile artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: TRACONBoundaries.geojson
+          path: |
+            TRACONBoundaries.geojson
+  enforce-dir-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Validate Directory Structure
+        run: |
+          echo "Validating directory structure..."
+          for dir in Boundaries/*; do
+            if [ -d "$dir" ]; then
+              id=$(basename "$dir")
+              json_files=("$dir"/*.json)
+              if [ ${#json_files[@]} -eq 0 ]; then
+                echo "::error file=$dir::No JSON files found in directory $dir"
+                exit 1
+              fi
+              for json_file in "${json_files[@]}"; do
+                if [[ ! "$json_file" =~ ^$dir/[^/]+\.json$ ]]; then
+                  echo "::error file=$json_file::Invalid JSON file name or location: $json_file"
+                  exit 1
+                fi
+              done
+            else
+              echo "::error file=$dir::Invalid directory: $dir"
+              exit 1
+            fi
+          done
+          echo "Directory structure is valid."
