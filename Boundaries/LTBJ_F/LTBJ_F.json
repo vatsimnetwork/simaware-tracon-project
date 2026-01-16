@@ -2,11 +2,11 @@
   "type": "Feature",
   "properties": {
     "id": "LTBJ_F",
-    "prefix": "LTBJ_F",
+    "prefix": ["LTBJ_F"],
     "suffix": "APP",
     "name": "Menderes",
-    "label_lat": "38.8092",
-    "label_lon": "27.2527"
+    "label_lat": 38.8092,
+    "label_lon": 27.2527
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -1,0 +1,26 @@
+{
+  "name": "simaware-helpers",
+  "type": "module",
+  "engines": {
+    "node": ">22"
+  },
+  "scripts": {
+    "compile": "node --experimental-strip-types bin/compile.ts",
+    "validate-schema": "node --experimental-strip-types bin/validate-schema.ts",
+    "check-contributor": "node --experimental-strip-types bin/contributor.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "csv-parse": "^6.1.0",
+    "csv-parser": "^3.2.0",
+    "fast-csv": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^25.0.9",
+    "geojson": "^0.5.0",
+    "tsc": "^2.0.4",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "yarn@4.12.0"
+}
