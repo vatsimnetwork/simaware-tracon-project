@@ -5,7 +5,9 @@
     "prefix": [
       "SMF"
     ],
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": 39.5,
+    "label_lon": -121.429166
   },
   "geometry": {
     "type": "MultiPolygon",

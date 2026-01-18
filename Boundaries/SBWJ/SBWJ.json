@@ -3,7 +3,7 @@
   "properties": {
     "id": "SBWJ",
     "prefix": ["SBWJ"],
-    "name": "Rio de Janeiro Control"
+    "name": "Rio Control"
   },
   "geometry": {
     "type": "MultiPolygon",
