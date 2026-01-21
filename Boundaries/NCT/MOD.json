@@ -6,8 +6,8 @@
       "MOD"
     ],
     "name": "NorCal Approach",
-    "label_lat": -120.28805600,
-    "label_lon": 36.89388900
+    "label_lat": 36.99926198,
+    "label_lon": -120.23872253
   },
   "geometry": {
     "type": "MultiPolygon",
