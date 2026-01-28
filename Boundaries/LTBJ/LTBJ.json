@@ -2,11 +2,11 @@
   "type": "Feature",
   "properties": {
     "id": "LTBJ",
-    "prefix": "LTBJ",
+    "prefix": ["LTBJ"],
     "suffix": "APP",
-    "name": "Menderes Appraoch",
-    "label_lat": "39.0646",
-    "label_lon": "28.1992"
+    "name": "Menderes Approach",
+    "label_lat": 39.0646,
+    "label_lon": 28.1992
   },
   "geometry": {
     "type": "MultiPolygon",

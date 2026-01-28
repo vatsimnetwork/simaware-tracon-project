@@ -5,6 +5,7 @@
     "prefix": [
       "LIRR_PN"
     ],
+	"suffix": "DEP",
     "name": "Roma Radar"
   },
   "geometry": {

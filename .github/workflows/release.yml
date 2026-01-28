@@ -5,20 +5,25 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Configure Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
-
-      - name: Compile Master Boundary File
-        run: node compiler.js
-
-      - name: Upload Master Boundary File
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Compile boundaries
+        shell: sh
+        working-directory: ./scripts
+        run: yarn compile
+      - name: Upload compile artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: TRACONBoundaries
-          path: TRACONBoundaries.geojson
+          name: TRACONBoundaries.geojson
+          path: |
+            TRACONBoundaries.geojson
 
   create_release:
     needs: compile
@@ -26,11 +31,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Download Master Boundary File
         uses: actions/download-artifact@v4
         with:
-          name: TRACONBoundaries
+          name: TRACONBoundaries.geojson
           path: .
 
       - name: Tag Version
