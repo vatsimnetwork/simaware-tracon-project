@@ -2,11 +2,11 @@
   "type": "Feature",
   "properties": {
     "id": "LTFM",
-    "prefix": "LTFM",
+    "prefix":[ "LTFM"],
     "suffix": "APP",
     "name": "Yesilkoy Approach",
-    "label_lat": "41.6436",
-    "label_lon": "29.1842"
+    "label_lat": 41.6436,
+    "label_lon": 29.1842
   },
   "geometry": {
     "type": "MultiPolygon",
