@@ -5,7 +5,9 @@
     "prefix": [
       "PBI"
     ],
-    "name": "Palm Beach Approach"
+    "name": "Palm Beach Approach",
+    "label_lat": 27.18722,
+    "label_lon": -79.89278
   },
   "geometry": {
     "type": "MultiPolygon",
