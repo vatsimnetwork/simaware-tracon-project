@@ -5,7 +5,9 @@
     "prefix": [
       "MSK"
     ],
-    "name": "Moscow Approach"
+    "name": "Moscow Approach",
+    "label_lat": 56.63055303322322,
+    "label_lon": 38.66878509521485
   },
   "geometry": {
     "type": "MultiPolygon",
