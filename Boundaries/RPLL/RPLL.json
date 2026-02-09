@@ -1,14 +1,12 @@
 {
   "type": "Feature",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "RPLL",
-        "prefix": [
-          "RPLL"
-        ],
-        "name": "Manila Approach"
+  "properties": {
+    "id": "RPLL",
+    "prefix": [
+      "RPLL"
+    ],
+    "name": "Manila Approach"
+  },
       },
       "geometry": {
         "type": "MultiPolygon",
