@@ -6,9 +6,9 @@
       "properties": {
         "id": "RPLL",
         "prefix": [
-          "TMA"
+          "RPLL"
         ],
-        "name": "Manila TMA Boundary"
+        "name": "Manila Approach"
       },
       "geometry": {
         "type": "MultiPolygon",
