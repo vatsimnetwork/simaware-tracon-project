@@ -5,7 +5,7 @@
     "prefix": [
       "RPLL_F"
     ],
-    "name": "Manila Approach Sector F"
+    "name": "Manila Approach"
   },
   "geometry": {
     "type": "MultiPolygon",
