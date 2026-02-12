@@ -5,7 +5,9 @@
     "prefix": [
       "RNO"
     ],
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": 39.98356162,
+    "label_lon": -119.90521449000001
   },
   "geometry": {
     "type": "MultiPolygon",

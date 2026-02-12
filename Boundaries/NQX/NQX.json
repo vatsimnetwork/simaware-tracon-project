@@ -5,7 +5,9 @@
     "prefix": [
       "NQX"
     ],
-    "name": "Navy Key West Approach"
+    "name": "Navy Key West Approach",
+    "label_lat": 24.966667,
+    "label_lon": -81.7
   },
   "geometry": {
     "type": "MultiPolygon",

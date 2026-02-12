@@ -2,11 +2,12 @@
   "type": "Feature",
   "properties": {
     "id": "YSCB",
-    "name": "Canberra Approach (East)",
+    "name": "Canberra Approach",
     "prefix": [
-      "CB",
-      "CB-W"
-    ]
+      "CB"
+    ],
+	"label_lat": -35.279845,
+    "label_lon": 149.808326           
   },
   "geometry": {
     "type": "MultiPolygon",

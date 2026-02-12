@@ -6,7 +6,9 @@
       "NCT"
     ],
     "suffix": "APP",
-    "name": "NorCal Approach"
+    "name": "NorCal Approach",
+    "label_lat": 37.774722,
+    "label_lon": -120.410556
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -1,3 +1,4 @@
 *.bcat
 TRACONBoundaries.geojson
 .DS_Store
+.idea
