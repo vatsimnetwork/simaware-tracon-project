@@ -3,8 +3,9 @@
   "properties": {
     "id": "ULLI",
     "prefix": [
-      "ULLI"
+      "ULLI_R"
     ],
+	  "suffix": "APP",
     "name": "Pulkovo Radar"
   },
   "geometry": {
