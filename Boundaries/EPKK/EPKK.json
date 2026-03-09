@@ -7,7 +7,7 @@
     "name": "Krakow Approach"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 17.592499999999998, 50.15972222222222 ],

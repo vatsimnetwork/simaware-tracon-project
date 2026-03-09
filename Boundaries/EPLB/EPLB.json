@@ -7,7 +7,7 @@
     "name": "Lublin Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 22.15972222222222, 51.32166666666667 ],

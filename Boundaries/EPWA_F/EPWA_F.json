@@ -6,7 +6,7 @@
     "name": "Warszawa Approach"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 20.953169655754493, 52.450255111035595 ],

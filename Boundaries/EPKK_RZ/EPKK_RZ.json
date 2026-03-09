@@ -7,7 +7,7 @@
     "name": "Krakow Approach (Rzeszow)"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 21.218372533682984, 49.8476663051253 ],

@@ -7,7 +7,7 @@
     "name": "Olsztyn Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 20.489722222222223, 53.61888888888889 ],

@@ -7,7 +7,7 @@
     "name": "Radom Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 21.05777777777778, 51.531666666666666 ],

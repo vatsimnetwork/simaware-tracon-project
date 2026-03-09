@@ -6,7 +6,7 @@
         "name": "Warszawa Approach (North)"
     },
     "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
             [
                 [ 19.147777777777776, 52.5325 ],

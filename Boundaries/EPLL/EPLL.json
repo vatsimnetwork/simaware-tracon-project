@@ -7,7 +7,7 @@
     "name": "Lodz Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 19.418333333333333, 51.98972222222222 ],

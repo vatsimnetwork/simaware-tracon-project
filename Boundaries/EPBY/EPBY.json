@@ -7,7 +7,7 @@
     "name": "Bydgoszcz Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 15.507801214209353, 52.232963462837226 ],

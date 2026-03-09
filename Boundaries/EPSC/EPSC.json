@@ -7,7 +7,7 @@
     "name": "Szczecin Tower"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 14.233333333333333, 53.962500000000006 ],

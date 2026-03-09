@@ -7,7 +7,7 @@
     "name": "Krakow Director (Krakow)"
   },
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
         [ 20.03638888888889, 50.355555555555554 ],
