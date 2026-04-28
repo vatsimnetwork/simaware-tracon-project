@@ -150,4 +150,4 @@ jobs:
         env:
           CHANGED_FILES: ${{ steps.changed.outputs.files }}
         run: |
-          printf '%s\n' "$CHANGED_FILES" | yarn --silent validate-geometry --changed-only
+          printf '%s\n' "$CHANGED_FILES" | yarn validate-geometry --changed-only

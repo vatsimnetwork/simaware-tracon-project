@@ -65,7 +65,7 @@ jobs:
         working-directory: ./scripts
         run: |
           set +e
-          yarn --silent validate-geometry > ../geometry-report.txt 2>&1
+          yarn validate-geometry > ../geometry-report.txt 2>&1
           status=$?
           echo "validate-geometry exit code: $status" >> ../geometry-report.txt
           exit 0
