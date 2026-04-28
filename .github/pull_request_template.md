@@ -30,9 +30,9 @@
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 
-- [ ] I have read [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) and I am on the approved-contributor list (or an approved contributor has commented their approval on this PR)
+- [ ] I have read [CONTRIBUTING.md](../../blob/main/CONTRIBUTING.md) and I am on the approved-contributor list (or an approved contributor has commented their approval on this PR)
+- [ ] My geometry meets the standards in [CONTRIBUTING.md](../../blob/main/CONTRIBUTING.md)
 - [ ] I ran `yarn validate` locally and it passes
-- [ ] My geometry meets the standards in CONTRIBUTING.md
 - [ ] If I touched a legacy file, I ran `yarn validate-geometry --fix` and brought it up to current standards
 
 <!-- markdownlint-disable-file MD041 -->
