@@ -1,5 +1,5 @@
-import { lstatSync, readdirSync } from "node:fs";
-import { dirname, extname, join } from "node:path";
+import {lstatSync, readdirSync} from 'node:fs';
+import {dirname, extname, join} from 'node:path';
 
 export function findJsonFiles(rootDir: string): string[] {
   const files: string[] = [];
@@ -9,8 +9,8 @@ export function findJsonFiles(rootDir: string): string[] {
       if (lstatSync(fullPath).isDirectory()) {
         walk(fullPath);
       } else if (
-        !dirname(fullPath).toLowerCase().includes("node_modules") &&
-        extname(fullPath).toLowerCase() === ".json"
+        !dirname(fullPath).toLowerCase().includes('node_modules') &&
+        extname(fullPath).toLowerCase() === '.json'
       ) {
         files.push(fullPath);
       }

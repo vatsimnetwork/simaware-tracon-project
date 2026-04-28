@@ -1,11 +1,11 @@
 // Geometry validation logic shared by validate-geometry.ts and
 // ownership-report.ts.
 
-import type { Feature, MultiPolygon, Polygon, Position } from "geojson";
+import type {Feature, MultiPolygon, Polygon, Position} from 'geojson';
 
 export const PRECISION_LIMIT = 7;
 
-export type Severity = "error" | "warning";
+export type Severity = 'error' | 'warning';
 
 export interface Violation {
   file: string;
@@ -24,9 +24,9 @@ export function eachRing(
 ): void {
   const geom = feature.geometry;
   if (!geom) return;
-  if (geom.type === "Polygon") {
+  if (geom.type === 'Polygon') {
     geom.coordinates.forEach((ring, ri) => cb(ring as Position[], 0, ri));
-  } else if (geom.type === "MultiPolygon") {
+  } else if (geom.type === 'MultiPolygon') {
     geom.coordinates.forEach((poly, pi) =>
       poly.forEach((ring, ri) => cb(ring as Position[], pi, ri)),
     );
@@ -36,14 +36,14 @@ export function eachRing(
 export function decimalPlaces(n: number): number {
   if (!Number.isFinite(n)) return 0;
   const s = n.toString();
-  if (s.includes("e") || s.includes("E")) {
+  if (s.includes('e') || s.includes('E')) {
     const [mantissa, expStr] = s.split(/[eE]/);
-    const dotIdx = mantissa.indexOf(".");
+    const dotIdx = mantissa.indexOf('.');
     const mantissaDp = dotIdx === -1 ? 0 : mantissa.length - dotIdx - 1;
     const exp = parseInt(expStr, 10);
     return Math.max(0, mantissaDp - exp);
   }
-  const dot = s.indexOf(".");
+  const dot = s.indexOf('.');
   return dot === -1 ? 0 : s.length - dot - 1;
 }
 
@@ -54,15 +54,10 @@ export function roundCoord(n: number): number {
 
 // Per-file checks
 
-export function runFileChecks(
-  file: string,
-  feature: Feature<Polygon | MultiPolygon>,
-): Violation[] {
+export function runFileChecks(file: string, feature: Feature<Polygon | MultiPolygon>): Violation[] {
   const violations: Violation[] = [];
   const where = (pi: number, ri: number) =>
-    feature.geometry.type === "MultiPolygon"
-      ? `polygon ${pi}, ring ${ri}`
-      : `ring ${ri}`;
+    feature.geometry.type === 'MultiPolygon' ? `polygon ${pi}, ring ${ri}` : `ring ${ri}`;
 
   // Closure
   eachRing(feature, (ring, pi, ri) => {
@@ -72,8 +67,8 @@ export function runFileChecks(
     if (f[0] !== l[0] || f[1] !== l[1]) {
       violations.push({
         file,
-        rule: "closure",
-        severity: "error",
+        rule: 'closure',
+        severity: 'error',
         message: `unclosed ring at ${where(pi, ri)}: first ${JSON.stringify(f)} != last ${JSON.stringify(l)}`,
       });
     }
@@ -83,7 +78,7 @@ export function runFileChecks(
   let precisionCount = 0;
   let worstDp = 0;
   let worstSample: Position | null = null;
-  eachRing(feature, (ring) => {
+  eachRing(feature, ring => {
     for (const pos of ring) {
       const dp = Math.max(decimalPlaces(pos[0]), decimalPlaces(pos[1]));
       if (dp > PRECISION_LIMIT) {
@@ -98,8 +93,8 @@ export function runFileChecks(
   if (precisionCount > 0) {
     violations.push({
       file,
-      rule: "precision",
-      severity: "error",
+      rule: 'precision',
+      severity: 'error',
       message: `${precisionCount} coord(s) exceed ${PRECISION_LIMIT} DP (worst: ${worstDp} DP, e.g. ${JSON.stringify(worstSample)})`,
     });
   }
@@ -119,7 +114,7 @@ export function findDuplicatePrefixSuffix(
       suffix?: string;
     } | null;
     if (!props || !Array.isArray(props.prefix)) continue;
-    const suffix = props.suffix || "APP";
+    const suffix = props.suffix || 'APP';
     for (const prefix of props.prefix) {
       const key = `${prefix}|${suffix}`;
       if (!seen.has(key)) seen.set(key, []);
@@ -133,9 +128,9 @@ export function findDuplicatePrefixSuffix(
       for (const file of unique) {
         out.push({
           file,
-          rule: "duplicate-prefix-suffix",
-          severity: "error",
-          message: `prefix/suffix '${key.replace("|", "/")}' duplicated`,
+          rule: 'duplicate-prefix-suffix',
+          severity: 'error',
+          message: `prefix/suffix '${key.replace('|', '/')}' duplicated`,
           relatedFiles: unique,
         });
       }
@@ -157,7 +152,7 @@ export function applyFixes(raw: string): string | null {
   let mutated = false;
 
   function mutateRing(ring: Position[]): Position[] {
-    const rounded = ring.map((pos) => {
+    const rounded = ring.map(pos => {
       const np: Position = [roundCoord(pos[0]), roundCoord(pos[1])];
       if (np[0] !== pos[0] || np[1] !== pos[1]) mutated = true;
       return np;
@@ -174,12 +169,10 @@ export function applyFixes(raw: string): string | null {
   }
 
   const geom = feature.geometry;
-  if (geom?.type === "Polygon") {
-    geom.coordinates = geom.coordinates.map((r) => mutateRing(r as Position[]));
-  } else if (geom?.type === "MultiPolygon") {
-    geom.coordinates = geom.coordinates.map((poly) =>
-      poly.map((r) => mutateRing(r as Position[])),
-    );
+  if (geom?.type === 'Polygon') {
+    geom.coordinates = geom.coordinates.map(r => mutateRing(r as Position[]));
+  } else if (geom?.type === 'MultiPolygon') {
+    geom.coordinates = geom.coordinates.map(poly => poly.map(r => mutateRing(r as Position[])));
   }
 
   return mutated ? JSON.stringify(feature, null, 2) : null;

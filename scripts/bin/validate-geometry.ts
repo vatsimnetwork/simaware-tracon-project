@@ -1,24 +1,24 @@
-import { fileURLToPath } from "url";
-import { readFileSync, writeFileSync } from "fs";
-import { join, relative, resolve } from "path";
-import { parseArgs } from "node:util";
-import type { Feature, MultiPolygon, Polygon } from "geojson";
-import { findJsonFiles } from "./lib/traverse.ts";
+import {fileURLToPath} from 'url';
+import {readFileSync, writeFileSync} from 'fs';
+import {join, relative, resolve} from 'path';
+import {parseArgs} from 'node:util';
+import type {Feature, MultiPolygon, Polygon} from 'geojson';
+import {findJsonFiles} from './lib/traverse.ts';
 import {
   type Violation,
   applyFixes,
   findDuplicatePrefixSuffix,
   runFileChecks,
-} from "./lib/geometry-checks.ts";
+} from './lib/geometry-checks.ts';
 
 //  CLI
 
-const { values, positionals } = parseArgs({
+const {values, positionals} = parseArgs({
   args: process.argv.slice(2),
   options: {
-    "changed-only": { type: "boolean" },
-    fix: { type: "boolean" },
-    help: { type: "boolean", short: "h" },
+    'changed-only': {type: 'boolean'},
+    fix: {type: 'boolean'},
+    help: {type: 'boolean', short: 'h'},
   },
   allowPositionals: true,
 });
@@ -40,28 +40,28 @@ Exits non-zero on any violation.`);
 }
 
 const fix = !!values.fix;
-const changedOnly = !!values["changed-only"];
+const changedOnly = !!values['changed-only'];
 
 if (fix && changedOnly) {
-  console.error("--fix and --changed-only are mutually exclusive");
+  console.error('--fix and --changed-only are mutually exclusive');
   process.exit(2);
 }
 
 //  Path discovery
 
 const scriptPath = fileURLToPath(new URL(import.meta.url).toString());
-const rootPath = join(scriptPath, "../../../");
-const boundariesDir = join(rootPath, "Boundaries");
+const rootPath = join(scriptPath, '../../../');
+const boundariesDir = join(rootPath, 'Boundaries');
 
 const allFiles = findJsonFiles(boundariesDir);
 
 function relSlash(file: string): string {
-  return relative(rootPath, file).replace(/\\/g, "/");
+  return relative(rootPath, file).replace(/\\/g, '/');
 }
 
 function resolveBoundaryPath(input: string): string | null {
   const abs = resolve(rootPath, input);
-  return allFiles.find((f) => resolve(f) === abs) ?? null;
+  return allFiles.find(f => resolve(f) === abs) ?? null;
 }
 
 let changedSet: Set<string> | null = null;
@@ -70,20 +70,18 @@ if (changedOnly) {
   if (positionals.length > 0) {
     inputs.push(...positionals);
   } else if (!process.stdin.isTTY) {
-    const stdin = readFileSync(0, "utf8");
+    const stdin = readFileSync(0, 'utf8');
     inputs.push(
       ...stdin
         .split(/\r?\n/)
-        .map((s) => s.trim())
+        .map(s => s.trim())
         .filter(Boolean),
     );
   }
-  const resolved = inputs
-    .map(resolveBoundaryPath)
-    .filter((p): p is string => p !== null);
+  const resolved = inputs.map(resolveBoundaryPath).filter((p): p is string => p !== null);
   changedSet = new Set(resolved);
   if (changedSet.size === 0) {
-    console.log("No boundary files in changed set; nothing to validate.");
+    console.log('No boundary files in changed set; nothing to validate.');
     process.exit(0);
   }
 }
@@ -94,15 +92,15 @@ const violations: Violation[] = [];
 const featuresByFile = new Map<string, Feature<Polygon | MultiPolygon>>();
 
 for (const filePath of allFiles) {
-  const raw = readFileSync(filePath, "utf8");
+  const raw = readFileSync(filePath, 'utf8');
   let feature: Feature<Polygon | MultiPolygon>;
   try {
     feature = JSON.parse(raw);
   } catch (e) {
     violations.push({
       file: filePath,
-      rule: "json-parse",
-      severity: "error",
+      rule: 'json-parse',
+      severity: 'error',
       message: `Invalid JSON: ${(e as Error).message}`,
     });
     continue;
@@ -122,7 +120,7 @@ for (const filePath of allFiles) {
 }
 
 if (fix) {
-  console.log("Done. Re-run validate-geometry to confirm.");
+  console.log('Done. Re-run validate-geometry to confirm.');
   process.exit(0);
 }
 
@@ -132,9 +130,9 @@ violations.push(...findDuplicatePrefixSuffix(featuresByFile));
 
 let toReport = violations;
 if (changedSet) {
-  toReport = violations.filter((v) => {
+  toReport = violations.filter(v => {
     if (v.relatedFiles && v.relatedFiles.length > 0) {
-      return v.relatedFiles.some((f) => changedSet!.has(f));
+      return v.relatedFiles.some(f => changedSet!.has(f));
     }
     return changedSet!.has(v.file);
   });
@@ -144,8 +142,8 @@ if (changedSet) {
 
 for (const v of toReport) {
   const extra = v.relatedFiles
-    ? ` (involves: ${v.relatedFiles.map((f) => relSlash(f)).join(", ")})`
-    : "";
+    ? ` (involves: ${v.relatedFiles.map(f => relSlash(f)).join(', ')})`
+    : '';
   console.error(`ERROR  ${relSlash(v.file)} [${v.rule}] ${v.message}${extra}`);
 }
 

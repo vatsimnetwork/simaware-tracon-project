@@ -12,34 +12,30 @@
 //   yarn ownership-report --bulk-threshold=150
 //   yarn ownership-report --exclude-sha=abc123,def456
 
-import { fileURLToPath } from "url";
-import { execFileSync } from "node:child_process";
-import { readFileSync } from "fs";
-import { join, relative } from "path";
-import { parseArgs } from "node:util";
-import { parse as parseCsv } from "csv-parse/sync";
-import type { Feature, MultiPolygon, Polygon } from "geojson";
-import { findJsonFiles } from "./lib/traverse.ts";
-import {
-  type Violation,
-  findDuplicatePrefixSuffix,
-  runFileChecks,
-} from "./lib/geometry-checks.ts";
+import {fileURLToPath} from 'url';
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'fs';
+import {join, relative} from 'path';
+import {parseArgs} from 'node:util';
+import {parse as parseCsv} from 'csv-parse/sync';
+import type {Feature, MultiPolygon, Polygon} from 'geojson';
+import {findJsonFiles} from './lib/traverse.ts';
+import {type Violation, findDuplicatePrefixSuffix, runFileChecks} from './lib/geometry-checks.ts';
 
 // --- Configuration -----------------------------------------------------------
 
 const DEFAULT_BULK_THRESHOLD = 100;
 const CONTRIBUTOR_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHzHhKz4icslNkd3I6mF1Mp_6gan4muRcWZb8fCYL8_S0C6GDpG409xQGTmPAXLPupEWWws3euNK7O/pub?gid=0&single=true&output=csv";
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHzHhKz4icslNkd3I6mF1Mp_6gan4muRcWZb8fCYL8_S0C6GDpG409xQGTmPAXLPupEWWws3euNK7O/pub?gid=0&single=true&output=csv';
 
 // --- CLI ---------------------------------------------------------------------
 
-const { values } = parseArgs({
+const {values} = parseArgs({
   args: process.argv.slice(2),
   options: {
-    "bulk-threshold": { type: "string" },
-    "exclude-sha": { type: "string" },
-    help: { type: "boolean", short: "h" },
+    'bulk-threshold': {type: 'string'},
+    'exclude-sha': {type: 'string'},
+    help: {type: 'boolean', short: 'h'},
   },
 });
 
@@ -58,26 +54,26 @@ Options:
   process.exit(0);
 }
 
-const bulkThreshold = values["bulk-threshold"]
-  ? parseInt(values["bulk-threshold"], 10)
+const bulkThreshold = values['bulk-threshold']
+  ? parseInt(values['bulk-threshold'], 10)
   : DEFAULT_BULK_THRESHOLD;
 if (!Number.isFinite(bulkThreshold) || bulkThreshold < 1) {
-  console.error(`Invalid --bulk-threshold: ${values["bulk-threshold"]}`);
+  console.error(`Invalid --bulk-threshold: ${values['bulk-threshold']}`);
   process.exit(2);
 }
 
 const explicitExcludes = new Set(
-  (values["exclude-sha"] ?? "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
+  (values['exclude-sha'] ?? '')
+    .split(',')
+    .map(s => s.trim().toLowerCase())
     .filter(Boolean),
 );
 
 // --- Setup -------------------------------------------------------------------
 
 const scriptPath = fileURLToPath(new URL(import.meta.url).toString());
-const rootPath = join(scriptPath, "../../../");
-const boundariesDir = join(rootPath, "Boundaries");
+const rootPath = join(scriptPath, '../../../');
+const boundariesDir = join(rootPath, 'Boundaries');
 
 // --- Bulk commit detection ---------------------------------------------------
 
@@ -85,15 +81,15 @@ function detectBulkCommits(threshold: number): Map<string, number> {
   // Walk every commit reachable from any ref, collecting file-change count
   // per commit via --shortstat. Returns a map of SHA -> filesChanged for
   // commits exceeding the threshold.
-  const out = execFileSync(
-    "git",
-    ["log", "--all", "--shortstat", "--format=COMMIT %H"],
-    { cwd: rootPath, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 },
-  );
+  const out = execFileSync('git', ['log', '--all', '--shortstat', '--format=COMMIT %H'], {
+    cwd: rootPath,
+    encoding: 'utf8',
+    maxBuffer: 256 * 1024 * 1024,
+  });
   const result = new Map<string, number>();
   let currentSha: string | null = null;
-  for (const line of out.split("\n")) {
-    if (line.startsWith("COMMIT ")) {
+  for (const line of out.split('\n')) {
+    if (line.startsWith('COMMIT ')) {
       currentSha = line.slice(7).trim().toLowerCase();
     } else if (currentSha && /files? changed/.test(line)) {
       const m = line.match(/(\d+) files? changed/);
@@ -128,24 +124,24 @@ interface AuthorAttribution {
 function gitFileHistory(file: string): CommitRecord[] {
   let out: string;
   try {
-    out = execFileSync(
-      "git",
-      ["log", "--follow", "--format=%H|%an|%ae|%aI", "--", file],
-      { cwd: rootPath, encoding: "utf8", maxBuffer: 16 * 1024 * 1024 },
-    );
+    out = execFileSync('git', ['log', '--follow', '--format=%H|%an|%ae|%aI', '--', file], {
+      cwd: rootPath,
+      encoding: 'utf8',
+      maxBuffer: 16 * 1024 * 1024,
+    });
   } catch {
     return [];
   }
   return out
-    .split("\n")
+    .split('\n')
     .filter(Boolean)
-    .map((line) => {
-      const [sha, name, email, date] = line.split("|");
+    .map(line => {
+      const [sha, name, email, date] = line.split('|');
       return {
-        sha: (sha ?? "").toLowerCase(),
-        name: name ?? "",
-        email: email ?? "",
-        date: date ?? "",
+        sha: (sha ?? '').toLowerCase(),
+        name: name ?? '',
+        email: email ?? '',
+        date: date ?? '',
       };
     });
 }
@@ -153,10 +149,10 @@ function gitFileHistory(file: string): CommitRecord[] {
 function attribute(
   file: string,
   excludedShas: Set<string>,
-): { primary: AuthorAttribution | null; all: AuthorAttribution[] } {
+): {primary: AuthorAttribution | null; all: AuthorAttribution[]} {
   const history = gitFileHistory(file);
-  const filtered = history.filter((c) => !excludedShas.has(c.sha));
-  if (filtered.length === 0) return { primary: null, all: [] };
+  const filtered = history.filter(c => !excludedShas.has(c.sha));
+  if (filtered.length === 0) return {primary: null, all: []};
 
   const groups = new Map<string, AuthorAttribution>();
   for (const c of filtered) {
@@ -178,7 +174,7 @@ function attribute(
     if (a.commitCount !== b.commitCount) return b.commitCount - a.commitCount;
     return b.lastTouched.localeCompare(a.lastTouched);
   });
-  return { primary: all[0], all };
+  return {primary: all[0], all};
 }
 
 // --- Contributor CSV ---------------------------------------------------------
@@ -198,14 +194,14 @@ async function loadContributorIndex(): Promise<Map<string, ContributorRow>> {
   const csv = await (await fetch(CONTRIBUTOR_CSV_URL)).text();
   const rows = parseCsv<ContributorRow>(csv, {
     columns: [
-      "username",
-      "expiry",
-      "cid",
-      "name",
-      "region",
-      "role",
-      "approvingCid",
-      "approvingStaff",
+      'username',
+      'expiry',
+      'cid',
+      'name',
+      'region',
+      'role',
+      'approvingCid',
+      'approvingStaff',
     ],
     skip_empty_lines: true,
   });
@@ -227,9 +223,7 @@ function extractGithubUsername(email: string): string | null {
   const m = email
     .toLowerCase()
     .trim()
-    .match(
-      /^(?:\d+\+)?([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)@users\.noreply\.github\.com$/,
-    );
+    .match(/^(?:\d+\+)?([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)@users\.noreply\.github\.com$/);
   return m ? m[1] : null;
 }
 
@@ -258,42 +252,35 @@ interface FileEntry {
 // --- Main --------------------------------------------------------------------
 
 async function main() {
-  console.error("Detecting bulk-move commits...");
+  console.error('Detecting bulk-move commits...');
   const detectedBulk = detectBulkCommits(bulkThreshold);
-  const excludedShas = new Set<string>([
-    ...detectedBulk.keys(),
-    ...explicitExcludes,
-  ]);
+  const excludedShas = new Set<string>([...detectedBulk.keys(), ...explicitExcludes]);
   console.error(
     `  ${detectedBulk.size} commit(s) exceed --bulk-threshold=${bulkThreshold} (excluded from attribution)` +
-      (explicitExcludes.size > 0
-        ? `; +${explicitExcludes.size} explicit --exclude-sha`
-        : ""),
+      (explicitExcludes.size > 0 ? `; +${explicitExcludes.size} explicit --exclude-sha` : ''),
   );
   if (detectedBulk.size > 0) {
-    const top = [...detectedBulk.entries()]
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
+    const top = [...detectedBulk.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
     for (const [sha, files] of top) {
       console.error(`    ${sha.slice(0, 12)}  ${files} files`);
     }
   }
 
-  console.error("Scanning Boundaries/ ...");
+  console.error('Scanning Boundaries/ ...');
   const allFiles = findJsonFiles(boundariesDir);
   const featuresByFile = new Map<string, Feature<Polygon | MultiPolygon>>();
   const violations: Violation[] = [];
 
   for (const filePath of allFiles) {
-    const raw = readFileSync(filePath, "utf8");
+    const raw = readFileSync(filePath, 'utf8');
     let feature: Feature<Polygon | MultiPolygon>;
     try {
       feature = JSON.parse(raw);
     } catch (e) {
       violations.push({
         file: filePath,
-        rule: "json-parse",
-        severity: "error",
+        rule: 'json-parse',
+        severity: 'error',
         message: `Invalid JSON: ${(e as Error).message}`,
       });
       continue;
@@ -305,7 +292,7 @@ async function main() {
 
   const perFile = new Map<string, FileEntry>();
   for (const v of violations) {
-    const rel = relative(rootPath, v.file).replace(/\\/g, "/");
+    const rel = relative(rootPath, v.file).replace(/\\/g, '/');
     if (!perFile.has(v.file)) {
       perFile.set(v.file, {
         file: v.file,
@@ -322,19 +309,17 @@ async function main() {
   let i = 0;
   for (const entry of perFile.values()) {
     if (++i % 100 === 0) console.error(`  ... ${i}/${perFile.size}`);
-    const { primary, all } = attribute(entry.file, excludedShas);
+    const {primary, all} = attribute(entry.file, excludedShas);
     entry.primary = primary;
     entry.allAuthors = all;
   }
 
-  console.error("Fetching contributor spreadsheet...");
+  console.error('Fetching contributor spreadsheet...');
   let contributorIdx: Map<string, ContributorRow>;
   try {
     contributorIdx = await loadContributorIndex();
   } catch (e) {
-    console.error(
-      `(failed: ${(e as Error).message}; continuing without contributor metadata)`,
-    );
+    console.error(`(failed: ${(e as Error).message}; continuing without contributor metadata)`);
     contributorIdx = new Map();
   }
 
@@ -363,59 +348,51 @@ function renderReport(
   const errorRules = new Map<string, number>();
   const warningRules = new Map<string, number>();
   for (const v of allViolations) {
-    const m = v.severity === "error" ? errorRules : warningRules;
+    const m = v.severity === 'error' ? errorRules : warningRules;
     m.set(v.rule, (m.get(v.rule) ?? 0) + 1);
   }
 
   out.push(`# Cleanup Ownership Report — ${today}`);
-  out.push("");
+  out.push('');
   out.push(
-    `Generated by \`yarn ownership-report\`. Commits that touched more than \`${meta.bulkThreshold}\` files are excluded from attribution as structural/bulk operations (\`${meta.bulkCommitsExcluded}\` such commit(s) detected${meta.explicitExcludes > 0 ? `; +${meta.explicitExcludes} explicit --exclude-sha` : ""}). Files with no remaining attributable author are flagged as **orphaned**.`,
+    `Generated by \`yarn ownership-report\`. Commits that touched more than \`${meta.bulkThreshold}\` files are excluded from attribution as structural/bulk operations (\`${meta.bulkCommitsExcluded}\` such commit(s) detected${meta.explicitExcludes > 0 ? `; +${meta.explicitExcludes} explicit --exclude-sha` : ''}). Files with no remaining attributable author are flagged as **orphaned**.`,
   );
-  out.push("");
+  out.push('');
 
-  out.push("## Summary");
-  out.push("");
+  out.push('## Summary');
+  out.push('');
   out.push(`- Files with at least one violation: **${perFile.size}**`);
-  out.push("");
-  out.push("### Errors");
-  out.push("");
-  for (const [rule, count] of [...errorRules.entries()].sort(
-    (a, b) => b[1] - a[1],
-  )) {
+  out.push('');
+  out.push('### Errors');
+  out.push('');
+  for (const [rule, count] of [...errorRules.entries()].sort((a, b) => b[1] - a[1])) {
     out.push(`- \`${rule}\`: ${count}`);
   }
-  out.push("");
-  out.push("### Warnings");
-  out.push("");
-  for (const [rule, count] of [...warningRules.entries()].sort(
-    (a, b) => b[1] - a[1],
-  )) {
+  out.push('');
+  out.push('### Warnings');
+  out.push('');
+  for (const [rule, count] of [...warningRules.entries()].sort((a, b) => b[1] - a[1])) {
     out.push(`- \`${rule}\`: ${count}`);
   }
-  out.push("");
+  out.push('');
 
-  const orphans = [...perFile.values()].filter((e) => e.primary === null);
+  const orphans = [...perFile.values()].filter(e => e.primary === null);
   out.push(`## Orphaned files — ${orphans.length}`);
-  out.push("");
+  out.push('');
   if (orphans.length === 0) {
-    out.push(
-      "_(none — every violating file has at least one non-bulk-move author)_",
-    );
+    out.push('_(none — every violating file has at least one non-bulk-move author)_');
   } else {
     out.push(
-      "Files where every commit was filtered as bulk/structural. The maintainer must reclaim or rebuild attribution for these.",
+      'Files where every commit was filtered as bulk/structural. The maintainer must reclaim or rebuild attribution for these.',
     );
-    out.push("");
-    out.push("| File | Violations |");
-    out.push("|---|---|");
-    for (const e of orphans.sort((a, b) =>
-      a.relPath.localeCompare(b.relPath),
-    )) {
-      out.push(`| \`${e.relPath}\` | ${[...e.rules].sort().join(", ")} |`);
+    out.push('');
+    out.push('| File | Violations |');
+    out.push('|---|---|');
+    for (const e of orphans.sort((a, b) => a.relPath.localeCompare(b.relPath))) {
+      out.push(`| \`${e.relPath}\` | ${[...e.rules].sort().join(', ')} |`);
     }
   }
-  out.push("");
+  out.push('');
 
   const byAuthor = new Map<string, FileEntry[]>();
   for (const e of perFile.values()) {
@@ -424,74 +401,68 @@ function renderReport(
     if (!byAuthor.has(key)) byAuthor.set(key, []);
     byAuthor.get(key)!.push(e);
   }
-  const sortedAuthors = [...byAuthor.entries()].sort(
-    (a, b) => b[1].length - a[1].length,
-  );
+  const sortedAuthors = [...byAuthor.entries()].sort((a, b) => b[1].length - a[1].length);
 
-  out.push(
-    `## Files by primary author — ${sortedAuthors.length} contributor(s)`,
-  );
-  out.push("");
+  out.push(`## Files by primary author — ${sortedAuthors.length} contributor(s)`);
+  out.push('');
 
   for (const [, files] of sortedAuthors) {
     const author = files[0].primary!;
     const contributor = lookupContributor(author, contributorIdx);
     const ghUser = extractGithubUsername(author.email);
-    const ghHint = ghUser ? ` — gh: \`${ghUser}\`` : "";
+    const ghHint = ghUser ? ` — gh: \`${ghUser}\`` : '';
     const status = contributor
-      ? `**${contributor.name || author.name}** (${contributor.username || "—"}, ${contributor.region || "—"}, role: ${contributor.role || "—"}, expires ${contributor.expiry || "—"})`
+      ? `**${contributor.name || author.name}** (${contributor.username || '—'}, ${contributor.region || '—'}, role: ${contributor.role || '—'}, expires ${contributor.expiry || '—'})`
       : `**${author.name}** \`<${author.email}>\`${ghHint} *(not in contributor spreadsheet)*`;
     out.push(`### ${status} — ${files.length} file(s)`);
-    out.push("");
+    out.push('');
     for (const e of files.sort((a, b) => a.relPath.localeCompare(b.relPath))) {
       const otherAuthors = e.allAuthors
         .slice(1)
-        .map((a) => `${a.name} (${a.commitCount})`)
-        .join(", ");
-      const others = otherAuthors ? ` — also: ${otherAuthors}` : "";
+        .map(a => `${a.name} (${a.commitCount})`)
+        .join(', ');
+      const others = otherAuthors ? ` — also: ${otherAuthors}` : '';
       const last = e.primary!.lastTouched.slice(0, 10);
       out.push(
-        `- [ ] \`${e.relPath}\` — ${[...e.rules].sort().join(", ")} — ${e.primary!.commitCount} commit(s), last ${last}${others}`,
+        `- [ ] \`${e.relPath}\` — ${[...e.rules].sort().join(', ')} — ${e.primary!.commitCount} commit(s), last ${last}${others}`,
       );
     }
-    out.push("");
+    out.push('');
   }
 
-  const dupes = allViolations.filter(
-    (v) => v.rule === "duplicate-prefix-suffix",
-  );
+  const dupes = allViolations.filter(v => v.rule === 'duplicate-prefix-suffix');
   if (dupes.length > 0) {
-    out.push("## Duplicate prefix/suffix pairs (manual resolution required)");
-    out.push("");
+    out.push('## Duplicate prefix/suffix pairs (manual resolution required)');
+    out.push('');
     out.push(
-      "Each pair below has two or more files matching the same `(prefix, suffix)`. One file in each group must be renamed (different prefix/suffix) or deleted.",
+      'Each pair below has two or more files matching the same `(prefix, suffix)`. One file in each group must be renamed (different prefix/suffix) or deleted.',
     );
-    out.push("");
+    out.push('');
     const grouped = new Map<string, Set<string>>();
     for (const v of dupes) {
       const m = v.message.match(/'([^']+)'/);
       if (!m) continue;
       const key = m[1];
       if (!grouped.has(key)) grouped.set(key, new Set());
-      (v.relatedFiles ?? []).forEach((f) =>
-        grouped.get(key)!.add(relative(rootPath, f).replace(/\\/g, "/")),
+      (v.relatedFiles ?? []).forEach(f =>
+        grouped.get(key)!.add(relative(rootPath, f).replace(/\\/g, '/')),
       );
     }
     for (const [key, files] of grouped) {
       out.push(
         `- \`${key}\` — ${[...files]
           .sort()
-          .map((f) => `\`${f}\``)
-          .join(" + ")}`,
+          .map(f => `\`${f}\``)
+          .join(' + ')}`,
       );
     }
-    out.push("");
+    out.push('');
   }
 
-  process.stdout.write(out.join("\n") + "\n");
+  process.stdout.write(out.join('\n') + '\n');
 }
 
-main().catch((e) => {
+main().catch(e => {
   console.error(e);
   process.exit(1);
 });
