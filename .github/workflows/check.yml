@@ -21,6 +21,26 @@ jobs:
         shell: sh
         working-directory: ./scripts
         run: yarn validate-schema
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: ESLint
+        shell: sh
+        working-directory: ./scripts
+        run: yarn lint
+      - name: Prettier (check)
+        shell: sh
+        working-directory: ./scripts
+        run: yarn format:check
   validate-contributor:
     runs-on: ubuntu-latest
     steps:
@@ -36,8 +56,7 @@ jobs:
       - name: Check Boundaries.geojson
         shell: sh
         working-directory: ./scripts
-        run: yarn check-contributor --login="${{ github.event.pull_request.user.login
-          }}" --failWhenMissing
+        run: yarn check-contributor --login="${{ github.event.pull_request.user.login }}" --failWhenMissing
   compile-boundaries:
     runs-on: ubuntu-latest
     steps:
@@ -57,9 +76,11 @@ jobs:
       - name: Upload compile artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: TRACONBoundaries.geojson
+          name: TRACONBoundaries-pr-${{ github.event.pull_request.number || github.run_id }}
           path: |
             TRACONBoundaries.geojson
+          if-no-files-found: error
+          retention-days: 30
   enforce-dir-structure:
     runs-on: ubuntu-latest
     steps:

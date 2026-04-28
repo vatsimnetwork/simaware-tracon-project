@@ -2,7 +2,7 @@ name: Data check
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   check-geojson:
@@ -43,3 +43,36 @@ jobs:
           name: TRACONBoundaries.geojson
           path: |
             TRACONBoundaries.geojson
+          if-no-files-found: error
+          retention-days: 30
+  validate-geometry-full:
+    # Non-blocking full-dataset geometry sweep on main. Surfaces legacy
+    # violations as a downloadable report without failing the workflow.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: Run full geometry validation
+        shell: bash
+        working-directory: ./scripts
+        run: |
+          set +e
+          yarn --silent validate-geometry > ../geometry-report.txt 2>&1
+          status=$?
+          echo "validate-geometry exit code: $status" >> ../geometry-report.txt
+          exit 0
+      - name: Upload geometry report
+        uses: actions/upload-artifact@v4
+        with:
+          name: geometry-report
+          path: geometry-report.txt
+          if-no-files-found: error
+          retention-days: 30
