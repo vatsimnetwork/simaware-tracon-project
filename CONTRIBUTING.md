@@ -6,11 +6,20 @@ Thanks for helping keep this dataset accurate. This guide covers everything you 
 
 ## Table of contents
 
-- [Approved contributors](#approved-contributors)
-- [Submitting a pull request](#submitting-a-pull-request)
-- [Geometry standards](#geometry-standards)
-- [Local validation workflow](#local-validation-workflow)
-- [Glossary](#glossary)
+- [Contributing to the VATSIM TRACON Project](#contributing-to-the-vatsim-tracon-project)
+  - [Table of contents](#table-of-contents)
+  - [Approved contributors](#approved-contributors)
+    - [If you are a staff member](#if-you-are-a-staff-member)
+    - [If you are not a staff member](#if-you-are-not-a-staff-member)
+  - [Submitting a pull request](#submitting-a-pull-request)
+  - [Worked example](#worked-example)
+  - [Geometry standards](#geometry-standards)
+    - [Coordinate format](#coordinate-format)
+    - [Coordinate precision (error)](#coordinate-precision-error)
+    - [Polygon closure (error)](#polygon-closure-error)
+    - [Minimum positions per ring](#minimum-positions-per-ring)
+    - [Prefix/suffix uniqueness (error)](#prefixsuffix-uniqueness-error)
+  - [Local validation workflow](#local-validation-workflow)
 
 ---
 
@@ -65,6 +74,47 @@ A good example PR is [#294](https://github.com/vatsimnetwork/simaware-tracon-pro
 > **Touching a legacy file?** If your PR modifies a file that contains pre-existing geometry violations (e.g. unclosed rings, excessive coordinate precision), CI will flag those issues. You're expected to clean them up as part of your PR — by editing a file, you take ownership of bringing it up to current standards. Run `yarn validate-geometry --fix` to handle the mechanical fixes automatically.
 
 ---
+
+## Worked example
+
+A boundary file is a single GeoJSON `Feature` with a `Polygon` or `MultiPolygon` geometry. Each file lives at `Boundaries/<FACILITY>/<SECTOR>.json` - the directory is the controlling facility's identifier, the filename is the sector identifier (commonly also the airport ICAO).
+
+A minimal valid file looks like this:
+
+```json
+{
+  "type": "Feature",
+  "properties": {
+    "id": "XYZ",
+    "prefix": ["XYZ"],
+    "suffix": "APP",
+    "name": "Example Approach"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      {
+        [-100.0000000, 40.0000000],
+        [-100.0000000, 41.0000000],
+        [-99.0000000, 41.0000000],
+        [-99.0000000, 40.0000000],
+        [-100.000000, 40.0000000]
+      }
+    ]
+  }
+}
+```
+
+A few things to note about the above example:
+
+- `properties.id` is typically the label shown in the mapping tool. Keep it short.
+- `properties.prefix` is an array - a single sector definition can match multiple callsign prefixes (e.g. `["LAX", "SCT"]`).
+- `properties.suffix` is optional. If not included, mapping tools should treat it as `"APP"` for matching. The `prefix` and `suffix` pair must be unique across the entire dataset,
+- `properties.name` is the the callsign shown to controllers/pilots.
+- Coordinates are `[longitude, latitude]` in WGS84, max 7 decimal places.
+- The first and last position of every polygon must match (closure). The example's outer ring opens and closes at `[-100.0000000, 40.0000000]`.
+
+For a real-world reference, look at [`Boundaries/NZCH/NZCH.json`](Boundaries/NZCH/NZCH.json) (Christchurch Approach).
 
 ## Geometry standards
 

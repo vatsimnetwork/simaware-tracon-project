@@ -6,7 +6,7 @@ The SimAware TRACON Project is a community-driven initiative to have accurate TR
 
 ## Contributing
 
-Contribution requires approval from Division-level or Sub-Division-level staff. The full process — including the approved-contributor list, PR submission requirements, and the geometry standards your data must meet — lives in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+Contributions require approval from Division-level or Sub-Division-level staff. [CONTRIBUTING.md](CONTRIBUTING.md) covers the full process: the approved-contributor list, PR submission requirements, the geometry standards your data must meet, and the local validation workflow. Start there before opening a pull request.
 
 ## Feature Properties
 
