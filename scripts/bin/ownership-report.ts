@@ -217,15 +217,32 @@ async function loadContributorIndex(): Promise<Map<string, ContributorRow>> {
   return idx;
 }
 
+/**
+ * Extract the GitHub username from a github.com noreply email.
+ *   modern: 12345678+username@users.noreply.github.com  -> username
+ *   legacy: username@users.noreply.github.com           -> username
+ * Returns null for any other email.
+ */
+function extractGithubUsername(email: string): string | null {
+  const m = email
+    .toLowerCase()
+    .trim()
+    .match(
+      /^(?:\d+\+)?([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)@users\.noreply\.github\.com$/,
+    );
+  return m ? m[1] : null;
+}
+
 function lookupContributor(
   author: AuthorAttribution,
   idx: Map<string, ContributorRow>,
 ): ContributorRow | null {
-  return (
-    idx.get(author.name.toLowerCase().trim()) ??
-    idx.get(author.email.toLowerCase().trim().split("@")[0]) ??
-    null
-  );
+  const ghUser = extractGithubUsername(author.email);
+  if (ghUser) {
+    const hit = idx.get(ghUser);
+    if (hit) return hit;
+  }
+  return idx.get(author.name.toLowerCase().trim()) ?? null;
 }
 
 // --- Types -------------------------------------------------------------------
@@ -419,9 +436,11 @@ function renderReport(
   for (const [, files] of sortedAuthors) {
     const author = files[0].primary!;
     const contributor = lookupContributor(author, contributorIdx);
+    const ghUser = extractGithubUsername(author.email);
+    const ghHint = ghUser ? ` — gh: \`${ghUser}\`` : "";
     const status = contributor
       ? `**${contributor.name || author.name}** (${contributor.username || "—"}, ${contributor.region || "—"}, role: ${contributor.role || "—"}, expires ${contributor.expiry || "—"})`
-      : `**${author.name}** \`<${author.email}>\` *(not in contributor spreadsheet)*`;
+      : `**${author.name}** \`<${author.email}>\`${ghHint} *(not in contributor spreadsheet)*`;
     out.push(`### ${status} — ${files.length} file(s)`);
     out.push("");
     for (const e of files.sort((a, b) => a.relPath.localeCompare(b.relPath))) {
