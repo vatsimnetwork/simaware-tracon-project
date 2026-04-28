@@ -2,7 +2,7 @@
 
 The SimAware TRACON Project is a community-driven initiative to have accurate TRACON (and other APP/DEP) facilities depicted on various VATSIM mapping tools. This project was originally developed exclusively for SimAware, although is open for community use.
 
-> Boundary data must conform to [RFC 7946 (The GeoJSON Format)](https://datatracker.ietf.org/doc/html/rfc7946) and the project's geometry standards. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+> Boundary data must conform to [RFC 7946 (GeoJSON)](https://datatracker.ietf.org/doc/html/rfc7946) and the project's geometry standards. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## Contributing
 
@@ -29,8 +29,9 @@ A typical feature property is shown:
 2. When a callsign with a matching prefix/suffix pair is found, SimAware chooses the correct TRACON boundary to draw.
 3. If no matching prefix/suffix pair is found, SimAware will revert back to a TRACON circle. Note that SimAware will assume `"suffix"="APP"` if none is specified.
 
-Note 1: If a double prefix callsign connects, e.g. LAX*U_APP, SimAware will check for matches on \_both* "LAX\*U" and "LAX" before reverting to a TRACON circle. This can be useful if further sectorization is desired, e.g. SCT Downey/Zuma sectors.  
-Note 2: If the same prefix/suffix pair is specified in the GeoJSON file, SimAware _will not_ know which one to choose. Each prefix/suffix pair _must_ be unique. This is enforced by the validator — see [CONTRIBUTING.md](CONTRIBUTING.md#prefixsuffix-uniqueness-error).
+**Note 1**: If a double prefix callsign connects, e.g. LAX_U_APP, SimAware will check for matches on both "LAX_U" and "LAX" before reverting to a TRACON circle. This can be useful if further sectorization is desired, e.g. SCT Downey/Zuma sectors.
+
+**Note 2**: If the same prefix/suffix pair is specified in the GeoJSON file, SimAware _will not_ know which one to choose. Each prefix/suffix pair _must_ be unique. This is enforced by the validator — see [CONTRIBUTING.md](CONTRIBUTING.md#prefixsuffix-uniqueness-error).
 
 ## Who's on the SimAware TRACON Project?
 

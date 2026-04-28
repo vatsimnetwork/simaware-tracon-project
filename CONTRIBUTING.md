@@ -68,7 +68,7 @@ A good example PR is [#294](https://github.com/vatsimnetwork/simaware-tracon-pro
 
 ## Geometry standards
 
-These rules apply to every Polygon and MultiPolygon in the dataset. The validator (`yarn validate-geometry`) enforces the _error_-level rules; warnings are flagged but don't block merging.
+These rules apply to every Polygon and MultiPolygon in the dataset. `yarn validate-geometry` enforces them programmatically; the JSON Schema (`schema-single.json`) covers the structural rules.
 
 ### Coordinate format
 
@@ -87,22 +87,13 @@ Every linear ring **must repeat its first position as its last position** (RFC 7
 
 > **Auto-fix**: `yarn validate-geometry --fix` appends the first position to any unclosed ring.
 
-### Minimum positions per ring (error)
+### Minimum positions per ring
 
-Each linear ring needs at least **4 positions** (3 unique vertices + the closure vertex). Anything less is not a polygon.
+Each linear ring needs at least **4 positions** (3 unique vertices + the closure vertex). Anything less is not a polygon. Enforced by `schema-single.json`.
 
 ### Prefix/suffix uniqueness (error)
 
 Each `(prefix, suffix)` pair must be unique across the entire dataset. If you need finer sectorisation, use a longer prefix (e.g. `LAX_U` instead of `LAX`) — see the README for how downstream consumers typically resolves callsigns. This is checked dataset-wide, not just per-PR.
-
-### Winding order (warning, will become error)
-
-Points in a closed polygon should flow in the following directions:
-
-- **Exterior rings** are wound **counter-clockwise** (CCW).
-- **Interior rings** (holes) are wound **clockwise** (CW).
-
-The validator will trigger a warning for incorrect winding, however this will become a hard failure in a future release. Most GIS tools (QGIS, geojson.io) will set this correctly on an export.
 
 ---
 
@@ -125,6 +116,6 @@ yarn validate-geometry --fix
 yarn validate
 ```
 
-`yarn validate-geometry` exits non-zero on any error-level violation. Warnings are printed.
+`yarn validate-geometry` exits non-zero on any violation.
 
-CI runs `yarn validate-geometry --changed-only` against the files modified in your PR.
+CI runs `yarn validate-geometry --changed-only` against the files modified in your PR. The cross-file `prefix/suffix uniqueness` check considers the full dataset and only fails when a duplicate involves at least one of your changed files.

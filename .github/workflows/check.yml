@@ -36,7 +36,8 @@ jobs:
       - name: Check Boundaries.geojson
         shell: sh
         working-directory: ./scripts
-        run: yarn check-contributor --login="${{ github.event.pull_request.user.login }}" --failWhenMissing
+        run: yarn check-contributor --login="${{ github.event.pull_request.user.login
+          }}" --failWhenMissing
   compile-boundaries:
     runs-on: ubuntu-latest
     steps:
@@ -87,3 +88,45 @@ jobs:
             fi
           done
           echo "Directory structure is valid."
+  validate-geometry-changed:
+    # Enforces RFC 7946 + project geometry rules on files modified in this PR
+    # only. Legacy violations on main are intentionally not blocked here; see
+    # CONTRIBUTING.md and push.yml.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
+      - name: List changed boundary files
+        id: changed
+        shell: bash
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+          CHANGED=$(git diff --name-only --diff-filter=AM "origin/$BASE_REF"...HEAD -- 'Boundaries/**/*.json' || true)
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          if [ -z "$CHANGED" ]; then
+            echo "No boundary files changed in this PR."
+          else
+            echo "Changed boundary files:"
+            echo "$CHANGED"
+          fi
+      - name: Validate geometry on changed files
+        if: steps.changed.outputs.files != ''
+        shell: bash
+        working-directory: ./scripts
+        env:
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
+        run: |
+          printf '%s\n' "$CHANGED_FILES" | yarn --silent validate-geometry --changed-only
