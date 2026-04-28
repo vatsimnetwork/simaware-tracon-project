@@ -7,10 +7,13 @@
   "scripts": {
     "compile": "node --experimental-strip-types bin/compile.ts",
     "validate-schema": "node --experimental-strip-types bin/validate-schema.ts",
-    "check-contributor": "node --experimental-strip-types bin/contributor.ts"
+    "validate-geometry": "node --experimental-strip-types bin/validate-geometry.ts",
+    "validate": "yarn validate-schema && yarn validate-geometry",
+    "check-contributor": "node --experimental-strip-types bin/contributor.ts",
+    "ownership-report": "node --experimental-strip-types bin/ownership-report.ts"
   },
   "dependencies": {
-    "ajv": "^8.17.1",
+    "ajv": "8.18.0",
     "csv-parse": "^6.1.0",
     "csv-parser": "^3.2.0",
     "fast-csv": "^5.0.5"
