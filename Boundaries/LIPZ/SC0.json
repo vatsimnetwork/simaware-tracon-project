@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "SE0",
+    "id": "SC0",
     "prefix": [
-      "LIPZ"
+      "LIPP"
     ],
     "name": "Padova Radar"
   },
