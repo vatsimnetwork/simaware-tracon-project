@@ -2,11 +2,11 @@
     "type": "Feature",
     "id": 0,
     "properties": {
-        "id": "LFKB",
+        "id": "LFKB-I",
         "prefix": [
-            "LFKB"
+            "LFKB_I"
         ],
-        "name": "Bastia Approach"
+        "name": "Bastia Information"
     },
     "geometry": {
         "type": "MultiPolygon",

@@ -2,11 +2,11 @@
     "type": "Feature",
     "id": 0,
     "properties": {
-        "id": "LFMT",
+        "id": "LFMT-I",
         "prefix": [
-            "LFMT"
+            "LFMT_I"
         ],
-        "name": "Montpellier Approach"
+        "name": "Montpellier Information"
     },
     "geometry": {
         "type": "MultiPolygon",

@@ -2,11 +2,11 @@
     "type": "Feature",
     "id": 0,
     "properties": {
-        "id": "LFML",
+        "id": "LFML-I",
         "prefix": [
-            "LFML"
+            "LFML_I"
         ],
-        "name": "Provence Approach"
+        "name": "Provence Information"
     },
     "geometry": {
         "type": "MultiPolygon",
