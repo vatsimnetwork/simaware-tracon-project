@@ -4,7 +4,7 @@
     "id": "OIKB",
     "name": "BANDAR ABBAS TMA",
     "prefix": ["OIKB"],
-    "suffix": ["APP"]
+    "suffix": "APP"
   },
   "geometry": {
     "type": "Polygon",

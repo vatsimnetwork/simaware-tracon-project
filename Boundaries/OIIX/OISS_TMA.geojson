@@ -4,7 +4,7 @@
     "id": "OISS",
     "name": "SHIRAZ TMA",
     "prefix": ["OISS"],
-    "suffix": ["APP"]
+    "suffix": "APP"
   },
   "geometry": {
     "type": "Polygon",

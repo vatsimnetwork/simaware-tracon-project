@@ -4,7 +4,7 @@
     "id": "OIZC",
     "name": "CHAHBAHAR TMA",
     "prefix": ["OIZC"],
-    "suffix": ["APP"]
+    "suffix": "APP"
   },
   "geometry": {
     "type": "Polygon",

@@ -4,7 +4,7 @@
     "id": "OIII",
     "name": "TEHRAN TMA",
     "prefix": ["OIII"],
-    "suffix": ["APP"]
+    "suffix": "APP"
   },
   "geometry": {
     "type": "Polygon",
