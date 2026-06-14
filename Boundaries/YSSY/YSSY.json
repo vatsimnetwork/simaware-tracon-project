@@ -2,14 +2,17 @@
   "type": "Feature",
   "properties": {
     "id": "YSSY",
-    "name": "Sydney Approach (North)",
     "prefix": [
       "SY",
       "SY-R",
       "SY-D",
       "SY-DE",
+      "SY-N",
       "SY-S"
-    ]
+    ],
+    "name": "Sydney Approach",
+    "label_lat": -33.684472,
+    "label_lon": 152.029479
   },
   "geometry": {
     "type": "MultiPolygon",
