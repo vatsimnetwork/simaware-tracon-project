@@ -2,10 +2,12 @@
   "type": "Feature",
   "properties": {
     "id": "YSBK",
-    "name": "Bankstown Approach",
     "prefix": [
       "BK"
-    ]
+    ],
+    "name": "Bankstown Approach",
+    "label_lat": -33.763333,
+    "label_lon": 151.078611
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -2,10 +2,12 @@
   "type": "Feature",
   "properties": {
     "id": "YSRI",
-    "name": "Richmond Approach",
     "prefix": [
       "RI"
-    ]
+    ],
+    "name": "Richmond Approach",
+    "label_lat": -33.299722,
+    "label_lon": 150.713056
   },
   "geometry": {
     "type": "MultiPolygon",

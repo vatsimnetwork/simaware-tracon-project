@@ -2,10 +2,12 @@
   "type": "Feature",
   "properties": {
     "id": "YSWS",
-    "name": "Walton Approach",
     "prefix": [
       "WS"
-    ]
+    ],
+    "name": "Walton Approach",
+    "label_lat": -33.77994,
+    "label_lon": 150.096385
   },
   "geometry": {
     "type": "MultiPolygon",

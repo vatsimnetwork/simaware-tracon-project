@@ -2,10 +2,12 @@
   "type": "Feature",
   "properties": {
     "id": "YBNA",
-    "name": "Ballina Approach",
     "prefix": [
       "BA"
-    ]
+    ],
+    "name": "Ballina Approach",
+    "label_lat": -29.393056,
+    "label_lon": 153.808611
   },
   "geometry": {
     "type": "MultiPolygon",
