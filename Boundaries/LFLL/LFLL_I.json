@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "LFLL",
+    "id": "LFLL-I",
     "prefix": [
-      "LFLL"
+      "LFLL_I"
     ],
-    "name": "Lyon Approach"
+    "name": "Lyon Information"
   },
   "geometry": {
     "type": "MultiPolygon",

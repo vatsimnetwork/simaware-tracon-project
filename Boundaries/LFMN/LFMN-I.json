@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "LFMN",
+    "id": "LFMN-I",
     "prefix": [
-      "LFMN"
+      "LFMN_I"
     ],
-    "name": "Nice Approach"
+    "name": "Nice Information"
   },
   "geometry": {
     "type": "MultiPolygon",
