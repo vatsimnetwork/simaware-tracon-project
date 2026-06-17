@@ -2,7 +2,7 @@
   "type": "Feature",
   "properties": {
     "id": "OIFM",
-    "name": "ESFAHAN TMA",
+    "name": "Esfahan Radar",
     "prefix": ["OIFM"],
     "suffix": "APP"
   },

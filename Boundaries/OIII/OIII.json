@@ -2,7 +2,7 @@
   "type": "Feature",
   "properties": {
     "id": "OIII",
-    "name": "TEHRAN TMA",
+    "name": "Mehrabad Radar",
     "prefix": ["OIII"],
     "suffix": "APP"
   },

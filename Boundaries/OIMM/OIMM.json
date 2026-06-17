@@ -2,7 +2,7 @@
   "type": "Feature",
   "properties": {
     "id": "OIMM",
-    "name": "MASHHAD TMA",
+    "name": "Mashhad Radar",
     "prefix": ["OIMM"],
     "suffix": "APP"
   },

@@ -2,7 +2,7 @@
   "type": "Feature",
   "properties": {
     "id": "OISS",
-    "name": "SHIRAZ TMA",
+    "name": "Shiraz Radar",
     "prefix": ["OISS"],
     "suffix": "APP"
   },

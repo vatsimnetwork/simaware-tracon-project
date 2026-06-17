@@ -2,7 +2,7 @@
   "type": "Feature",
   "properties": {
     "id": "OIKB",
-    "name": "BANDAR ABBAS TMA",
+    "name": "Bandar Abbas Approach",
     "prefix": ["OIKB"],
     "suffix": "APP"
   },
