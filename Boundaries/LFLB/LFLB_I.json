@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "LFLB",
+    "id": "LFLB-I",
     "prefix": [
-      "LFLB"
+      "LFLB_I"
     ],
-    "name": "Chambery Approach"
+    "name": "Chambery Information"
   },
   "geometry": {
     "type": "MultiPolygon",
