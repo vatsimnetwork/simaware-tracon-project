@@ -5,9 +5,7 @@
     "prefix": [
       "EYPA"
     ],
-    "suffix": [
-      "TWR"
-     ],
+    "suffix":"TWR",
     "name": "Palanga Tower"
   },
   "geometry": {
