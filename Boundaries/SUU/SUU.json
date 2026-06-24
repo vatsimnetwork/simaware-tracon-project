@@ -5,7 +5,9 @@
     "prefix": [
       "SUU"
     ],
-    "name": "Travis Approach"
+    "name": "Travis Approach",
+    "label_lat": 38.62198000,
+    "label_lon": -122.22750000
   },
   "geometry": {
     "type": "MultiPolygon",

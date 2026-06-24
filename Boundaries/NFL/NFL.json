@@ -5,7 +5,9 @@
     "prefix": [
       "NFL"
     ],
-    "name": "Fallon Approach"
+    "name": "Fallon Approach",
+    "label_lat": 39.95000000,
+    "label_lon": -118.63444000
   },
   "geometry": {
     "type": "MultiPolygon",

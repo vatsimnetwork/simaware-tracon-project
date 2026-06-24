@@ -2,3 +2,4 @@
 TRACONBoundaries.geojson
 .DS_Store
 .idea
+*.qmd

@@ -5,7 +5,9 @@
     "prefix": [
       "FAT"
     ],
-    "name": "Fresno Approach"
+    "name": "Fresno Approach",
+    "label_lat": 37.15068059,
+    "label_lon": -119.76239073
   },
   "geometry": {
     "type": "MultiPolygon",
