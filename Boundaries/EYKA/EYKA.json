@@ -5,9 +5,7 @@
       "prefix": [
         "EYKA"
       ],
-      "suffix": [
-        "TWR"
-      ],
+      "suffix":"TWR",
       "name": "Kaunas Tower"
     },
     "geometry": {
