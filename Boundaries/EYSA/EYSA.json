@@ -5,9 +5,7 @@
     "prefix": [
       "EYSA"
     ],
-    "suffix": [
-      "TWR"
-    ],
+    "suffix":"TWR",
     "name": "Siauliai Tower"
   },
   "geometry": {
