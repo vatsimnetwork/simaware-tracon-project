@@ -5,7 +5,9 @@
     "prefix": [
       "LIPP"
     ],
-    "name": "Padova Radar"
+    "name": "Padova Radar",
+	"label_lat": 45.579166666667,
+	"label_lon": 12.677222222222
   },
   "geometry": {
     "type": "MultiPolygon",
