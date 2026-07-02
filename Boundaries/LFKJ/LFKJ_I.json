@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "LFKJ",
+    "id": "LFKJ-I",
     "prefix": [
-      "LFKJ"
+      "LFKJ-I"
     ],
-    "name": "Ajaccio Approach"
+    "name": "Ajaccio Information"
   },
   "geometry": {
     "type": "MultiPolygon",
