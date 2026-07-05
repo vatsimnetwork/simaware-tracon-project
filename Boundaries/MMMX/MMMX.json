@@ -3,7 +3,10 @@
   "properties": {
     "id": "MMMX",
     "prefix": [
-      "MMMX"
+      "MMMX",
+      "MMTO",
+      "MMSM",
+      "MMPB"
     ],
     "name": "Mexico TMA"
   },
