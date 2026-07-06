@@ -7,8 +7,8 @@
     ],
     "suffix": "CTR",
     "name": "Vancouver Centre",
-    "label_lat": 51.0,
-    "label_lon": -126.0
+    "label_lat": 52.1022,
+    "label_lon": -126.4111
   },
   "geometry": {
     "type": "Polygon",
