@@ -1,11 +1,11 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "LECL-VAP",
+    "id": "LEVC",
     "prefix": [
       "LEVC"
     ],
-    "name": "Valencia Control"
+    "name": "Valencia Approach"
   },
   "geometry": {
     "type": "MultiPolygon",
