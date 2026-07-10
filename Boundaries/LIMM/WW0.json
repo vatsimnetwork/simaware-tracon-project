@@ -3,7 +3,9 @@
   "properties": {
     "id": "WW0",
     "prefix": ["LIMM_WW"],
-    "name": "Milano Radar"
+    "name": "Milano Radar",
+    "label_lat": 44.614444444444,
+    "label_lon": 8.6475
   },
   "geometry": {
     "type": "MultiPolygon",
