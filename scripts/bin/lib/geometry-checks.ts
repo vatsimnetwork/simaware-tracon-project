@@ -146,7 +146,8 @@ export function applyFixes(raw: string): string | null {
   let feature: Feature<Polygon | MultiPolygon>;
   try {
     feature = JSON.parse(raw);
-  } catch {
+  } catch (e) {
+    console.error('Failed to parse geometry JSON while applying fixes:', e);
     return null;
   }
   let mutated = false;
