@@ -133,7 +133,7 @@ jobs:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           git fetch --no-tags --depth=1 origin "$BASE_REF"
-          CHANGED=$(git diff --name-only --diff-filter=AM "origin/$BASE_REF"...HEAD -- 'Boundaries/**/*.json' || true)
+          CHANGED=$(git diff --name-only --diff-filter=AMR "origin/$BASE_REF"...HEAD -- 'Boundaries/**/*.json')
           echo "files<<EOF" >> "$GITHUB_OUTPUT"
           echo "$CHANGED" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"

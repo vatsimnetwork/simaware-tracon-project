@@ -27,7 +27,9 @@ if (values.help) {
   console.log(`Usage: validate-geometry [options] [files...]
 
 Options:
-  --changed-only   Only report errors in files passed as args (or via stdin).
+  --changed-only   Only report errors in existing boundary files passed as args
+                   (or via stdin). Every supplied path must match; empty input
+                   is a successful no-op.
                    Cross-file checks (e.g. duplicate prefix/suffix) still run
                    against the whole dataset, but are only reported when a
                    changed file is involved.
@@ -78,7 +80,22 @@ if (changedOnly) {
         .filter(Boolean),
     );
   }
-  const resolved = inputs.map(resolveBoundaryPath).filter((p): p is string => p !== null);
+  const resolved: string[] = [];
+  const unmatched: string[] = [];
+  for (const input of inputs) {
+    const path = resolveBoundaryPath(input);
+    if (path === null) {
+      unmatched.push(input);
+    } else {
+      resolved.push(path);
+    }
+  }
+  if (unmatched.length > 0) {
+    for (const input of unmatched) {
+      console.error(`ERROR  ${input.replace(/\\/g, '/')} [path] not a boundary JSON file`);
+    }
+    process.exit(1);
+  }
   changedSet = new Set(resolved);
   if (changedSet.size === 0) {
     console.log('No boundary files in changed set; nothing to validate.');
@@ -121,10 +138,9 @@ for (const filePath of allFiles) {
 
 if (fix) {
   console.log('Done. Re-run validate-geometry to confirm.');
-  process.exit(0);
+} else {
+  violations.push(...findDuplicatePrefixSuffix(featuresByFile));
 }
-
-violations.push(...findDuplicatePrefixSuffix(featuresByFile));
 
 //  Filter by changed set
 

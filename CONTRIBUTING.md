@@ -64,14 +64,14 @@ Have a staff member from your facility email the request on your behalf. The ema
 
 1. Fork the repository and create a branch for your change.
 2. Make your edits inside the appropriate `Boundaries/<FACILITY>/` folder.
-3. Run the validators locally before pushing — see [Local validation workflow](#local-validation-workflow).
+3. Run the validators locally before pushing - see [Local validation workflow](#local-validation-workflow).
 4. Open a pull request using the GitHub template. Fill in every section of the template.
 5. Include one or more **screenshots** of the change in a GIS viewer (e.g. [geojson.io](https://geojson.io)) so reviewers can see what the sector looks like.
 6. For new sectors, include supporting documentation (AIP excerpts, SOPs, official charts) so reviewers can verify the geometry against an authoritative source.
 
 A good example PR is [#294](https://github.com/vatsimnetwork/simaware-tracon-project/pull/294).
 
-> **Touching a legacy file?** If your PR modifies a file that contains pre-existing geometry violations (e.g. unclosed rings, excessive coordinate precision), CI will flag those issues. You're expected to clean them up as part of your PR — by editing a file, you take ownership of bringing it up to current standards. Run `yarn validate-geometry --fix` to handle the mechanical fixes automatically.
+> **Touching a legacy file?** If your PR modifies a file that contains pre-existing geometry violations (e.g. unclosed rings, excessive coordinate precision), CI will flag those issues. You're expected to clean them up as part of your PR - by editing a file, you take ownership of bringing it up to current standards. Run `yarn validate-geometry --fix` to handle the mechanical fixes automatically.
 
 ---
 
@@ -93,13 +93,13 @@ A minimal valid file looks like this:
   "geometry": {
     "type": "Polygon",
     "coordinates": [
-      {
-        [-100.0000000, 40.0000000],
-        [-100.0000000, 41.0000000],
-        [-99.0000000, 41.0000000],
-        [-99.0000000, 40.0000000],
-        [-100.000000, 40.0000000]
-      }
+      [
+        [-100.0, 40.0],
+        [-100.0, 41.0],
+        [-99.0, 41.0],
+        [-99.0, 40.0],
+        [-100.0, 40.0]
+      ]
     ]
   }
 }
@@ -118,7 +118,7 @@ For a real-world reference, look at [`Boundaries/NZCH/NZCH.json`](Boundaries/NZC
 
 ## Geometry standards
 
-These rules apply to every Polygon and MultiPolygon in the dataset. `yarn validate-geometry` enforces them programmatically; the JSON Schema (`schema-single.json`) covers the structural rules.
+These rules apply to every Polygon and MultiPolygon in the dataset. `yarn validate-geometry` checks ring closure, coordinate precision, and duplicate prefix/suffix pairs. The JSON Schema (`schema-single.json`) checks structure and coordinate limits.
 
 ### Coordinate format
 
@@ -127,7 +127,7 @@ These rules apply to every Polygon and MultiPolygon in the dataset. `yarn valida
 
 ### Coordinate precision (error)
 
-Coordinates must use **at most 7 decimal places**. This rule is enforced **on changed files in pull requests**. The `main` branch is not re-validated for legacy data; it will be cleaned up gradually.
+Coordinates must use **at most 7 decimal places**. This rule is enforced **on changed files in pull requests**. A full non-blocking advisory sweep runs on `main` so legacy data can be cleaned up gradually without failing unrelated changes.
 
 > **Auto-fix**: `yarn validate-geometry --fix` rounds all coordinates to 7 DP in place.
 
@@ -139,11 +139,11 @@ Every linear ring **must repeat its first position as its last position** (RFC 7
 
 ### Minimum positions per ring
 
-Each linear ring needs at least **4 positions** (3 unique vertices + the closure vertex). Anything less is not a polygon. Enforced by `schema-single.json`.
+Each linear ring needs at least **4 positions**. The first and last positions must close the ring, and the remaining positions must describe a valid polygon.
 
 ### Prefix/suffix uniqueness (error)
 
-Each `(prefix, suffix)` pair must be unique across the entire dataset. If you need finer sectorisation, use a longer prefix (e.g. `LAX_U` instead of `LAX`) — see the README for how downstream consumers typically resolves callsigns. This is checked dataset-wide, not just per-PR.
+Each `(prefix, suffix)` pair must be unique across the entire dataset. If you need finer sectorisation, use a longer prefix (e.g. `LAX_U` instead of `LAX`) - see the README for how downstream consumers typically resolves callsigns. Pull-request validation reports duplicate groups involving at least one changed file.
 
 ---
 
@@ -166,6 +166,8 @@ yarn validate-geometry --fix
 yarn validate
 ```
 
-`yarn validate-geometry` exits non-zero on any violation.
+`yarn validate-geometry` validates the full local dataset and exits non-zero on any violation. On `main`, CI runs the same full sweep as a non-blocking advisory job and uploads its output as the downloadable `geometry-report` artifact.
 
-CI runs `yarn validate-geometry --changed-only` against the files modified in your PR. The cross-file `prefix/suffix uniqueness` check considers the full dataset and only fails when a duplicate involves at least one of your changed files.
+`yarn validate-geometry --fix` continues fixing valid files when another file contains malformed JSON, reports every parse failure, and exits non-zero so those files are not overlooked.
+
+CI runs `yarn validate-geometry --changed-only` against boundary files added, modified, or renamed in your PR, using each rename's current path; deleted files are excluded. Every supplied path must resolve to a current boundary file; parse failures and stale or unmatched paths fail validation. The cross-file `prefix/suffix uniqueness` check considers the full dataset and reports duplicate groups involving at least one changed file.
