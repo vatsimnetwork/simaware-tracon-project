@@ -416,7 +416,7 @@ function renderReport(
       : `**${author.name}** \`<${author.email}>\`${ghHint} *(not in contributor spreadsheet)*`;
     out.push(`### ${status} — ${files.length} file(s)`);
     out.push('');
-    for (const e of files.sort((a, b) => a.relPath.localeCompare(b.relPath))) {
+    for (const e of [...files].sort((a, b) => a.relPath.localeCompare(b.relPath))) {
       const otherAuthors = e.allAuthors
         .slice(1)
         .map(a => `${a.name} (${a.commitCount})`)
