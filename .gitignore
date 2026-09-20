@@ -7,3 +7,4 @@ desktop.ini
 .idea
 .vscode
 *.log
+*.qmd

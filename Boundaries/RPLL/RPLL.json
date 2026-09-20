@@ -5,7 +5,9 @@
     "prefix": [
       "RPLL"
     ],
-    "name": "Manila Approach"
+    "name": "Manila Approach",
+    "label_lat": 15.46162,
+    "label_lon": 121.32751
   },
   "geometry": {
     "type": "MultiPolygon",
