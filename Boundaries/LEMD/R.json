@@ -6,8 +6,8 @@
       "LEMD_R"
     ],
     "name": "Madrid Director",
-    "label_lat": 40.8376,
-    "label_lon": -3.0110
+    "label_lat": 40.4833,
+    "label_lon": -4.2333
   },
   "geometry": {
     "type": "MultiPolygon",
