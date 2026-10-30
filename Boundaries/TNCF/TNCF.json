@@ -1,9 +1,9 @@
 {
   "type": "Feature",
   "properties": {
-    "id": "TNCC",
+    "id": "TNCF",
     "prefix": [
-      "TNCC"
+      "TNCF"
     ],
     "suffix": "APP",
     "name": "Curaçao Terminal"
