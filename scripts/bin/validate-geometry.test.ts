@@ -8,7 +8,6 @@ import {fileURLToPath} from 'node:url';
 
 const sourceBin = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(sourceBin, '../..');
-const windowsTempRoot = 'C:\\Users\\tompk\\AppData\\Local\\Temp\\opencode';
 
 interface CliResult {
   readonly status: number | null;
@@ -17,9 +16,7 @@ interface CliResult {
 }
 
 function createSandbox(): string {
-  const tempRoot = process.platform === 'win32' ? windowsTempRoot : tmpdir();
-  mkdirSync(tempRoot, {recursive: true});
-  const root = mkdtempSync(join(tempRoot, 'validate-geometry-'));
+  const root = mkdtempSync(join(tmpdir(), 'validate-geometry-'));
   const bin = join(root, 'scripts', 'bin');
   const lib = join(bin, 'lib');
   mkdirSync(lib, {recursive: true});
