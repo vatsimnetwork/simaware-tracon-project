@@ -129,7 +129,8 @@ function gitFileHistory(file: string): CommitRecord[] {
       encoding: 'utf8',
       maxBuffer: 16 * 1024 * 1024,
     });
-  } catch {
+  } catch (e) {
+    console.error(`Failed to read git history for ${file}:`, e);
     return [];
   }
   return out
@@ -388,7 +389,7 @@ function renderReport(
     out.push('');
     out.push('| File | Violations |');
     out.push('|---|---|');
-    for (const e of orphans.sort((a, b) => a.relPath.localeCompare(b.relPath))) {
+    for (const e of [...orphans].sort((a, b) => a.relPath.localeCompare(b.relPath))) {
       out.push(`| \`${e.relPath}\` | ${[...e.rules].sort().join(', ')} |`);
     }
   }
