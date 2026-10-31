@@ -1,6 +1,6 @@
 # Contributing to the VATSIM TRACON Project
 
-Thanks for helping keep this dataset accurate. This guide covers everything you need to know before opening a pull request: how can contribute, how to submit changes, and the geometry standards your data must meet.
+Thanks for helping keep this dataset accurate. This guide covers everything you need to know before opening a pull request: how you can contribute, how to submit changes, and the geometry standards your data must meet.
 
 > **Important**: All boundary data in this project must conform to [RFC 7946 (the GeoJSON format)](https://datatracker.ietf.org/doc/html/rfc7946) and to any project-specific geometry standards in this document.
 
@@ -109,8 +109,8 @@ A few things to note about the above example:
 
 - `properties.id` is typically the label shown in the mapping tool. Keep it short.
 - `properties.prefix` is an array - a single sector definition can match multiple callsign prefixes (e.g. `["LAX", "SCT"]`).
-- `properties.suffix` is optional. If not included, mapping tools should treat it as `"APP"` for matching. The `prefix` and `suffix` pair must be unique across the entire dataset,
-- `properties.name` is the the callsign shown to controllers/pilots.
+- `properties.suffix` is optional. If not included, mapping tools should treat it as `"APP"` for matching. The `prefix` and `suffix` pair must be unique across the entire dataset.
+- `properties.name` is the callsign shown to controllers/pilots.
 - Coordinates are `[longitude, latitude]` in WGS84, max 7 decimal places.
 - The first and last position of every polygon must match (closure). The example's outer ring opens and closes at `[-100.0000000, 40.0000000]`.
 
@@ -143,7 +143,7 @@ Each linear ring needs at least **4 positions**. The first and last positions mu
 
 ### Prefix/suffix uniqueness (error)
 
-Each `(prefix, suffix)` pair must be unique across the entire dataset. If you need finer sectorisation, use a longer prefix (e.g. `LAX_U` instead of `LAX`) - see the README for how downstream consumers typically resolves callsigns. Pull-request validation reports duplicate groups involving at least one changed file.
+Each `(prefix, suffix)` pair must be unique across the entire dataset. If you need finer sectorisation, use a longer prefix (e.g. `LAX_U` instead of `LAX`) - see the README for how downstream consumers typically resolve callsigns. Pull-request validation reports duplicate groups involving at least one changed file.
 
 ---
 
