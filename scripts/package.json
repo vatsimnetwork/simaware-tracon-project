@@ -9,6 +9,7 @@
     "validate-schema": "node --experimental-strip-types bin/validate-schema.ts",
     "validate-geometry": "node --experimental-strip-types bin/validate-geometry.ts",
     "validate": "yarn validate-schema && yarn validate-geometry",
+    "test": "node --experimental-strip-types --test \"bin/**/*.test.ts\"",
     "check-contributor": "node --experimental-strip-types bin/contributor.ts",
     "ownership-report": "node --experimental-strip-types bin/ownership-report.ts",
     "lint": "eslint bin",

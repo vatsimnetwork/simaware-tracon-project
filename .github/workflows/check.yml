@@ -41,6 +41,10 @@ jobs:
         shell: sh
         working-directory: ./scripts
         run: yarn format:check
+      - name: Unit tests
+        shell: sh
+        working-directory: ./scripts
+        run: yarn test
   validate-contributor:
     runs-on: ubuntu-latest
     steps:
