@@ -5,6 +5,7 @@
     "prefix": [
       "LAX"
     ],
+    "suffix": "APP",
     "name": "SoCal Approach"
   },
   "geometry": {
