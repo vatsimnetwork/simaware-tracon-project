@@ -41,6 +41,18 @@ jobs:
         shell: sh
         working-directory: ./scripts
         run: yarn format:check
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+      - name: Install deps
+        shell: sh
+        working-directory: ./scripts
+        run: yarn
       - name: Unit tests
         shell: sh
         working-directory: ./scripts
@@ -117,6 +129,7 @@ jobs:
     # Enforces RFC 7946 + project geometry rules on files modified in this PR
     # only. Legacy violations on main are intentionally not blocked here; see
     # CONTRIBUTING.md and push.yml.
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -136,7 +149,6 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
-          git fetch --no-tags --depth=1 origin "$BASE_REF"
           CHANGED=$(git diff --name-only --diff-filter=AMR "origin/$BASE_REF"...HEAD -- 'Boundaries/**/*.json')
           echo "files<<EOF" >> "$GITHUB_OUTPUT"
           echo "$CHANGED" >> "$GITHUB_OUTPUT"
