@@ -1,6 +1,6 @@
 import type {FeatureCollection, MultiPolygon, Polygon} from 'geojson';
 import {join} from 'path';
-import {lstatSync, readdirSync, readFileSync, writeFile} from 'node:fs';
+import {lstatSync, readdirSync, readFileSync, writeFileSync} from 'node:fs';
 import {dirname, extname} from 'node:path';
 import {fileURLToPath} from 'url';
 
@@ -41,8 +41,4 @@ files.forEach(value => {
   template.features.push(JSON.parse(data));
 });
 
-writeFile(join(rootPath, '/TRACONBoundaries.geojson'), JSON.stringify(template), err => {
-  if (err) {
-    console.error(err);
-  }
-});
+writeFileSync(join(rootPath, '/TRACONBoundaries.geojson'), JSON.stringify(template));
