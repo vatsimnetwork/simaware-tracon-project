@@ -5,7 +5,9 @@
     "prefix": [
       "LIMM_LA"
     ],
-    "name": "Milano Radar"
+    "name": "Milano Radar",
+	"label_lat": 44.733541666667,
+	"label_lon": 10.014658333333
   },
   "geometry": {
     "type": "MultiPolygon",
