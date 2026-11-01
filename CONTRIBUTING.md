@@ -166,7 +166,21 @@ yarn validate-geometry --fix
 yarn validate
 ```
 
-`yarn validate-geometry` validates the full local dataset and exits non-zero on any violation. On `main`, CI runs the same full sweep as a non-blocking advisory job and uploads its output as the downloadable `geometry-report` artifact.
+To check only the files you changed, which is what CI enforces on your PR, pass their paths or pipe a list in. Paths are relative to the repository root, even when you run the command from `scripts/`:
+
+```bash
+cd scripts
+
+# one or more explicit files
+yarn validate-geometry --changed-only Boundaries/NZCH/NZCH.json
+
+# every boundary file you have changed relative to upstream main
+git diff --name-only --diff-filter=AMR origin/main...HEAD -- ':/Boundaries/**/*.json' | yarn validate-geometry --changed-only
+```
+
+Use whichever remote points at `vatsimnetwork/simaware-tracon-project` in place of `origin` (usually `upstream` on a fork). If no files are supplied, the command succeeds without checking anything, so a "nothing to validate" result means your file list was empty.
+
+`yarn validate-geometry` on its own validates the full local dataset and exits non-zero on any violation, including legacy violations in files you have not touched. Those do not block your PR. On `main`, CI runs the same full sweep as a non-blocking advisory job and uploads its output as the downloadable `geometry-report` artifact.
 
 `yarn validate-geometry --fix` continues fixing valid files when another file contains malformed JSON, reports every parse failure, and exits non-zero so those files are not overlooked.
 
