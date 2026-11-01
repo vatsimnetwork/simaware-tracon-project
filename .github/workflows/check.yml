@@ -103,7 +103,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Validate Directory Structure
+        shell: bash
         run: |
+          shopt -s nullglob
           echo "Validating directory structure..."
           for dir in Boundaries/*; do
             if [ -d "$dir" ]; then
