@@ -210,6 +210,93 @@ test('--changed-only reports duplicate groups involving a selected file only', t
   assert.doesNotMatch(result.stderr, /OLD\/APP/);
 });
 
+test('--fix with file arguments only rewrites the selected files', t => {
+  // Given: two fixable boundaries, only one of which is selected
+  const root = createSandbox();
+  t.after(() => rmSync(root, {recursive: true, force: true}));
+  const messy = [
+    [10.123456789, 20],
+    [30, 20],
+    [30, 40],
+  ];
+  const selected = writeBoundary(root, 'Boundaries/AAA/AAA.json', polygon('AAA', messy));
+  const untouched = writeBoundary(root, 'Boundaries/BBB/BBB.json', polygon('BBB', messy));
+  const untouchedBefore = readFileSync(untouched, 'utf8');
+
+  // When: fix mode is given a single path
+  const result = runCli(root, ['--fix', 'Boundaries/AAA/AAA.json']);
+
+  // Then: only the selected file is rewritten
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /fixed: Boundaries\/AAA\/AAA\.json/);
+  assert.doesNotMatch(result.stdout, /BBB/);
+  assert.deepEqual(
+    JSON.parse(readFileSync(selected, 'utf8')).geometry.coordinates[0][0],
+    [10.1234568, 20],
+  );
+  assert.equal(readFileSync(untouched, 'utf8'), untouchedBefore);
+});
+
+test('--fix with file arguments ignores malformed JSON in unselected files', t => {
+  // Given: a malformed boundary that is not selected and a fixable one that is
+  const root = createSandbox();
+  t.after(() => rmSync(root, {recursive: true, force: true}));
+  writeBoundary(root, 'Boundaries/BAD/BAD.json', '{ malformed');
+  writeBoundary(
+    root,
+    'Boundaries/FIX/FIX.json',
+    polygon('FIX', [
+      [10.123456789, 20],
+      [30, 20],
+      [30, 40],
+    ]),
+  );
+
+  // When: fix mode is scoped to the fixable file
+  const result = runCli(root, ['--fix', 'Boundaries/FIX/FIX.json']);
+
+  // Then: the unselected file is not read, so it is not reported
+  assert.equal(result.status, 0);
+  assert.doesNotMatch(result.stderr, /BAD/);
+});
+
+test('--fix rejects every unmatched file argument without changing anything', t => {
+  // Given: one fixable boundary and one stale path
+  const root = createSandbox();
+  t.after(() => rmSync(root, {recursive: true, force: true}));
+  const fixable = writeBoundary(
+    root,
+    'Boundaries/FIX/FIX.json',
+    polygon('FIX', [
+      [10.123456789, 20],
+      [30, 20],
+      [30, 40],
+    ]),
+  );
+  const before = readFileSync(fixable, 'utf8');
+
+  // When: fix mode receives a matched and an unmatched path
+  const result = runCli(root, ['--fix', 'Boundaries/FIX/FIX.json', 'Boundaries/OLD/OLD.json']);
+
+  // Then: the command fails before writing anything
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Boundaries\/OLD\/OLD\.json.*not a boundary JSON file/);
+  assert.equal(readFileSync(fixable, 'utf8'), before);
+});
+
+test('file arguments without --fix or --changed-only are rejected', t => {
+  // Given: a boundary that would otherwise be validated as part of the full dataset
+  const root = createSandbox();
+  t.after(() => rmSync(root, {recursive: true, force: true}));
+  writeBoundary(root, 'Boundaries/NEW/NEW.json', polygon('NEW'));
+
+  // When: a path is supplied with neither scoping flag
+  const result = runCli(root, ['Boundaries/NEW/NEW.json']);
+
+  // Then: the command refuses rather than silently validating everything
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /require --fix or --changed-only/);
+});
 test('worked example contains valid JSON', () => {
   // Given: CONTRIBUTING worked example JSON block
   const markdown = readFileSync(join(repositoryRoot, 'CONTRIBUTING.md'), 'utf8');

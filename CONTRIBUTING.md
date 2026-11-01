@@ -71,7 +71,7 @@ Have a staff member from your facility email the request on your behalf. The ema
 
 A good example PR is [#294](https://github.com/vatsimnetwork/simaware-tracon-project/pull/294).
 
-> **Touching a legacy file?** If your PR modifies a file that contains pre-existing geometry violations (e.g. unclosed rings, excessive coordinate precision), CI will flag those issues. You're expected to clean them up as part of your PR - by editing a file, you take ownership of bringing it up to current standards. Run `yarn validate-geometry --fix` to handle the mechanical fixes automatically.
+> **Touching a legacy file?** If your PR modifies a file that contains pre-existing geometry violations (e.g. unclosed rings, excessive coordinate precision), CI will flag those issues. You're expected to clean them up as part of your PR - by editing a file, you take ownership of bringing it up to current standards. Run `yarn validate-geometry --fix <your files>` to handle the mechanical fixes automatically (see [Local validation workflow](#local-validation-workflow)).
 
 ---
 
@@ -129,13 +129,13 @@ These rules apply to every Polygon and MultiPolygon in the dataset. `yarn valida
 
 Coordinates must use **at most 7 decimal places**. This rule is enforced **on changed files in pull requests**. A full non-blocking advisory sweep runs on `main` so legacy data can be cleaned up gradually without failing unrelated changes.
 
-> **Auto-fix**: `yarn validate-geometry --fix` rounds all coordinates to 7 DP in place.
+> **Auto-fix**: `yarn validate-geometry --fix <your files>` rounds all coordinates to 7 DP in place.
 
 ### Polygon closure (error)
 
 Every linear ring **must repeat its first position as its last position** (RFC 7946 §3.1.6).
 
-> **Auto-fix**: `yarn validate-geometry --fix` appends the first position to any unclosed ring.
+> **Auto-fix**: `yarn validate-geometry --fix <your files>` appends the first position to any unclosed ring.
 
 ### Minimum positions per ring
 
@@ -159,8 +159,8 @@ yarn validate-schema
 # Geometry check (RFC 7946 + project rules)
 yarn validate-geometry
 
-# Auto-fix safe rules (closure, precision)
-yarn validate-geometry --fix
+# Auto-fix safe rules (closure, precision) in the files you changed
+yarn validate-geometry --fix Boundaries/NZCH/NZCH.json
 
 # Run both
 yarn validate
@@ -182,6 +182,8 @@ Use whichever remote points at `vatsimnetwork/simaware-tracon-project` in place 
 
 `yarn validate-geometry` on its own validates the full local dataset and exits non-zero on any violation, including legacy violations in files you have not touched. Those do not block your PR. On `main`, CI runs the same full sweep as a non-blocking advisory job and uploads its output as the downloadable `geometry-report` artifact.
 
-`yarn validate-geometry --fix` continues fixing valid files when another file contains malformed JSON, reports every parse failure, and exits non-zero so those files are not overlooked.
+`yarn validate-geometry --fix` only rewrites the files you name, using the same repo-root-relative paths as `--changed-only`. Every path must match a boundary file, otherwise nothing is written. Always name your files: with no arguments, `--fix` rewrites every boundary file in the dataset, which would put unrelated files in your PR. Unlike `--changed-only`, `--fix` does not read a file list from stdin.
+
+When fixing, `--fix` continues past a file with malformed JSON, reports every parse failure, and exits non-zero so those files are not overlooked.
 
 CI runs `yarn validate-geometry --changed-only` against boundary files added, modified, or renamed in your PR, using each rename's current path; deleted files are excluded. Every supplied path must resolve to a current boundary file; parse failures and stale or unmatched paths fail validation. The cross-file `prefix/suffix uniqueness` check considers the full dataset and reports duplicate groups involving at least one changed file.

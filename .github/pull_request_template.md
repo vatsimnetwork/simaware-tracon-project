@@ -33,6 +33,6 @@
 - [ ] I have read [CONTRIBUTING.md](../../blob/main/CONTRIBUTING.md) and I am on the approved-contributor list (or an approved contributor has commented their approval on this PR)
 - [ ] My geometry meets the standards in [CONTRIBUTING.md](../../blob/main/CONTRIBUTING.md)
 - [ ] I ran `yarn validate-schema` and `yarn validate-geometry --changed-only` on the files I changed and both pass (see [Local validation workflow](../../blob/main/CONTRIBUTING.md#local-validation-workflow))
-- [ ] If I touched a legacy file, I ran `yarn validate-geometry --fix` and brought it up to current standards
+- [ ] If I touched a legacy file, I ran `yarn validate-geometry --fix <my files>` and brought it up to current standards
 
 <!-- markdownlint-disable-file MD041 -->

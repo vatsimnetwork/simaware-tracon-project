@@ -34,6 +34,9 @@ Options:
                    against the whole dataset, but are only reported when a
                    changed file is involved.
   --fix            Auto-fix closure and coordinate precision in place.
+                   With file arguments, only those files are rewritten (every
+                   path must match a boundary file; stdin is not read). With
+                   no arguments, every boundary file is fixed.
                    Mutually exclusive with --changed-only.
   -h, --help       Show this help.
 
@@ -46,6 +49,11 @@ const changedOnly = !!values['changed-only'];
 
 if (fix && changedOnly) {
   console.error('--fix and --changed-only are mutually exclusive');
+  process.exit(2);
+}
+
+if (positionals.length > 0 && !fix && !changedOnly) {
+  console.error('File arguments require --fix or --changed-only');
   process.exit(2);
 }
 
@@ -66,20 +74,7 @@ function resolveBoundaryPath(input: string): string | null {
   return allFiles.find(f => resolve(f) === abs) ?? null;
 }
 
-let changedSet: Set<string> | null = null;
-if (changedOnly) {
-  const inputs: string[] = [];
-  if (positionals.length > 0) {
-    inputs.push(...positionals);
-  } else if (!process.stdin.isTTY) {
-    const stdin = readFileSync(0, 'utf8');
-    inputs.push(
-      ...stdin
-        .split(/\r?\n/)
-        .map(s => s.trim())
-        .filter(Boolean),
-    );
-  }
+function resolveAll(inputs: readonly string[]): Set<string> {
   const resolved: string[] = [];
   const unmatched: string[] = [];
   for (const input of inputs) {
@@ -96,19 +91,41 @@ if (changedOnly) {
     }
     process.exit(1);
   }
-  changedSet = new Set(resolved);
+  return new Set(resolved);
+}
+
+let changedSet: Set<string> | null = null;
+if (changedOnly) {
+  const inputs: string[] = [];
+  if (positionals.length > 0) {
+    inputs.push(...positionals);
+  } else if (!process.stdin.isTTY) {
+    const stdin = readFileSync(0, 'utf8');
+    inputs.push(
+      ...stdin
+        .split(/\r?\n/)
+        .map(s => s.trim())
+        .filter(Boolean),
+    );
+  }
+  changedSet = resolveAll(inputs);
   if (changedSet.size === 0) {
     console.log('No boundary files in changed set; nothing to validate.');
     process.exit(0);
   }
 }
 
+// --fix only reads explicit arguments. Reading stdin here could turn an empty
+// file list into a rewrite of the whole dataset.
+const fixSet: Set<string> | null = fix && positionals.length > 0 ? resolveAll(positionals) : null;
+const filesToProcess = fixSet ? allFiles.filter(f => fixSet.has(f)) : allFiles;
+
 //  Main
 
 const violations: Violation[] = [];
 const featuresByFile = new Map<string, Feature<Polygon | MultiPolygon>>();
 
-for (const filePath of allFiles) {
+for (const filePath of filesToProcess) {
   const raw = readFileSync(filePath, 'utf8');
   let feature: Feature<Polygon | MultiPolygon>;
   try {
@@ -163,7 +180,7 @@ for (const v of toReport) {
   console.error(`ERROR  ${relSlash(v.file)} [${v.rule}] ${v.message}${extra}`);
 }
 
-const summary = `${toReport.length} error(s)${changedSet ? ` across ${changedSet.size} changed file(s)` : ` across ${allFiles.length} file(s)`}`;
+const summary = `${toReport.length} error(s)${changedSet ? ` across ${changedSet.size} changed file(s)` : ` across ${filesToProcess.length} file(s)`}`;
 console.log(`\n${summary}`);
 
 process.exit(toReport.length > 0 ? 1 : 0);
