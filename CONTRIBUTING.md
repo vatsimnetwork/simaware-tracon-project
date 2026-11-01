@@ -54,7 +54,7 @@ Have a staff member from your facility email the request on your behalf. The ema
 > **Important**:
 >
 > - The **name** you provide will be published on the contributor list.
-> - Approved contributor status lasts **2 years** unless otherwise specified. After that, a fresh request is required.
+> - Approved contributor status lasts **2 years** unless otherwise specified. After that, a fresh request is required. CI checks the expiry date: a pull request from a contributor whose approval has expired is flagged until they are renewed or an approved contributor comments approval on the PR.
 > - Approved contributors may be tagged in issues or pull requests for review.
 > - Non-approved contributors may still submit pull requests if an approved contributor comments approval on the PR. This approval is **scoped to only that PR**.
 

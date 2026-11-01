@@ -17,16 +17,14 @@ import {execFileSync} from 'node:child_process';
 import {readFileSync} from 'fs';
 import {join, relative} from 'path';
 import {parseArgs} from 'node:util';
-import {parse as parseCsv} from 'csv-parse/sync';
 import type {Feature, MultiPolygon, Polygon} from 'geojson';
+import {type ContributorRow, loadContributorRows} from './lib/contributors.ts';
 import {findJsonFiles} from './lib/traverse.ts';
 import {type Violation, findDuplicatePrefixSuffix, runFileChecks} from './lib/geometry-checks.ts';
 
 // --- Configuration -----------------------------------------------------------
 
 const DEFAULT_BULK_THRESHOLD = 100;
-const CONTRIBUTOR_CSV_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHzHhKz4icslNkd3I6mF1Mp_6gan4muRcWZb8fCYL8_S0C6GDpG409xQGTmPAXLPupEWWws3euNK7O/pub?gid=0&single=true&output=csv';
 
 // --- CLI ---------------------------------------------------------------------
 
@@ -180,32 +178,8 @@ function attribute(
 
 // --- Contributor CSV ---------------------------------------------------------
 
-interface ContributorRow {
-  username: string;
-  expiry: string;
-  cid: string;
-  name: string;
-  region: string;
-  role: string;
-  approvingCid: string;
-  approvingStaff: string;
-}
-
 async function loadContributorIndex(): Promise<Map<string, ContributorRow>> {
-  const csv = await (await fetch(CONTRIBUTOR_CSV_URL)).text();
-  const rows = parseCsv<ContributorRow>(csv, {
-    columns: [
-      'username',
-      'expiry',
-      'cid',
-      'name',
-      'region',
-      'role',
-      'approvingCid',
-      'approvingStaff',
-    ],
-    skip_empty_lines: true,
-  });
+  const rows = await loadContributorRows();
   const idx = new Map<string, ContributorRow>();
   for (const row of rows) {
     if (row.name) idx.set(row.name.toLowerCase().trim(), row);

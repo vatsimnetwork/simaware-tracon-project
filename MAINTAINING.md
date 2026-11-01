@@ -28,7 +28,7 @@ Every PR runs [`check.yml`](.github/workflows/check.yml):
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `check-schemas`             | Validates every boundary file against `schema-single.json`.                                                              |
 | `validate-geometry-changed` | Runs `validate-geometry --changed-only` on boundary files added, modified or renamed in the PR. Skipped if none changed. |
-| `validate-contributor`      | Fails if the PR author's GitHub login is not on the contributor list.                                                    |
+| `validate-contributor`      | Fails if the PR author's GitHub login is not on the contributor list, or its approval has expired.                       |
 | `compile-boundaries`        | Builds `TRACONBoundaries.geojson` and uploads it as the `TRACONBoundaries-pr-<number>` artifact.                         |
 | `enforce-dir-structure`     | Requires `Boundaries/<FACILITY>/<name>.json` and no empty facility folders.                                              |
 | `lint`                      | ESLint and Prettier on `scripts/`.                                                                                       |
@@ -36,7 +36,9 @@ Every PR runs [`check.yml`](.github/workflows/check.yml):
 
 Geometry rules are enforced on changed files only. Legacy violations in files a PR does not touch are deliberately ignored. The one cross-file rule, prefix/suffix uniqueness, looks at the whole dataset but only reports duplicate groups that include a changed file.
 
-`validate-contributor` will be red for authors who are not on the list. CONTRIBUTING.md allows a non-listed author to submit if an approved contributor comments approval on the PR, so check for that comment yourself.
+`validate-contributor` will be red for authors who are not on the list, whose approval has expired, or whose expiry date in the sheet cannot be read. Approval holds through the whole expiry day (UTC). A login listed more than once counts as approved if any one of its rows is still valid, so a renewal row works without deleting the old one. CONTRIBUTING.md allows a non-listed author to submit if an approved contributor comments approval on the PR, so check for that comment yourself. The same applies to an expired author.
+
+The job's result is posted on the PR when it is opened and does not update itself. After the sheet is corrected, re-run the `validate-contributor` job.
 
 ### What CI does not check
 
