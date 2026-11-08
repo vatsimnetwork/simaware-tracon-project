@@ -6,7 +6,9 @@
       "RCKH"
     ],
     "suffix": "APP",
-    "name": "Kaohsiung Approach"
+    "name": "Kaohsiung Approach",
+    "label_lat": 22.576944,
+    "label_lon": 120.350278
   },
   "geometry": {
     "type": "MultiPolygon",

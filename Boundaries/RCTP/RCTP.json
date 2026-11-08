@@ -6,7 +6,9 @@
       "RCTP"
     ],
     "suffix": "APP",
-    "name": "Taipei Approach"
+    "name": "Taipei Approach",
+    "label_lat": 25.080167,
+    "label_lon": 121.232222
   },
   "geometry": {
     "type": "MultiPolygon",
