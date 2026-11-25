@@ -5,7 +5,7 @@
         "prefix":[
             "SACO"
         ],
-        "name:": "Cordoba Approach"
+        "name": "Cordoba Approach"
       },
       "geometry": {
         "type": "MultiPolygon",
