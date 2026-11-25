@@ -5,7 +5,9 @@
     "prefix": [
       "UWGG"
     ],
-    "name": "Nizhniy Approach"
+    "name": "Nizhniy Approach",
+    "label_lat": 56.649,
+    "label_lon": 44.93
   },
   "geometry": {
     "type": "MultiPolygon",
