@@ -5,7 +5,7 @@
         "prefix":[
             "SAME"
         ],
-        "name:": "Mendoza Approach"
+        "name": "Mendoza Approach"
       },
       "geometry": {
         "type": "MultiPolygon",
